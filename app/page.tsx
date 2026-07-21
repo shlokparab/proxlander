@@ -32,11 +32,11 @@ const memberNames = [
 ];
 
 const reveal: Variants = {
-  hidden: { y: "110%", opacity: 0 },
+  hidden: { y: "28%", opacity: 0 },
   show: (i: number) => ({
     y: 0,
     opacity: 1,
-    transition: { delay: 0.12 + i * 0.08, duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+    transition: { delay: 0.06 + i * 0.06, duration: 0.65, ease: [0.16, 1, 0.3, 1] },
   }),
 };
 
@@ -50,7 +50,7 @@ export default function Home() {
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const id = window.setTimeout(() => setLoaded(true), reduceMotion ? 0 : 220);
+    const id = window.setTimeout(() => setLoaded(true), reduceMotion ? 0 : 520);
     return () => window.clearTimeout(id);
   }, [reduceMotion]);
 
@@ -58,33 +58,38 @@ export default function Home() {
     <main>
       <AnimatePresence>
         {!loaded && (
-          <motion.div
-            className="loader"
-            initial={{ opacity: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, filter: reduceMotion ? "blur(0px)" : "blur(16px)" }}
-            transition={{ duration: reduceMotion ? 0 : 0.9, ease: [0.22, 1, 0.36, 1] }}
-            aria-hidden="true"
-          >
-            <span>PROXIMA / MUMBAI</span>
-            <b>Proxima Mumbai</b>
+          <motion.div className="curtain" initial="closed" animate="closed" exit="open" aria-hidden="true">
+            <motion.div
+              className="curtain-panel curtain-panel-left"
+              variants={{ closed: { x: 0 }, open: { x: "-102%" } }}
+              transition={{ duration: reduceMotion ? 0 : 0.82, ease: [0.76, 0, 0.24, 1] }}
+            />
+            <motion.div
+              className="curtain-panel curtain-panel-right"
+              variants={{ closed: { x: 0 }, open: { x: "102%" } }}
+              transition={{ duration: reduceMotion ? 0 : 0.82, ease: [0.76, 0, 0.24, 1] }}
+            />
+            <motion.div
+              className="curtain-mark"
+              variants={{ closed: { opacity: 1, y: 0 }, open: { opacity: 0, y: -10 } }}
+              transition={{ duration: reduceMotion ? 0 : 0.22, ease: "easeOut" }}
+            >
+              <span>Proxima / Mumbai</span>
+              <b>Builders, in motion.</b>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <motion.div
-        className="page-shell"
-        initial={{ opacity: reduceMotion ? 1 : 0.12 }}
-        animate={{ opacity: loaded ? 1 : reduceMotion ? 1 : 0.12 }}
-        transition={{ duration: reduceMotion ? 0 : 1.05, ease: [0.22, 1, 0.36, 1] }}
-      >
+      <div className="page-shell">
       <header className="masthead">
         <a className="brand" href="#top" aria-label="Proxima Mumbai home">
           <span className="brand-shape" />
           <span>proxima<br />mumbai</span>
         </a>
         <div className="mast-center">19.0760° N / 72.8777° E<br />Friday, builders online</div>
-        <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="main-nav">
-          {menuOpen ? "Close" : "Navigate"} <span>{menuOpen ? "×" : "↘"}</span>
+        <button className={`menu-button${menuOpen ? " menu-button-open" : ""}`} onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="main-nav">
+          {menuOpen ? "Close" : "Navigate"}
         </button>
         <motion.nav id="main-nav" className="nav-orbit" animate={{ scale: menuOpen ? 1 : 0, opacity: menuOpen ? 1 : 0 }} initial={false}>
           <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
@@ -97,15 +102,20 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <div className="hero-current">
-          <svg className="current-image" viewBox="0 0 1600 760" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <motion.div
+          className="hero-current"
+          initial={reduceMotion ? false : { opacity: 0, scale: 1.01 }}
+          animate={loaded ? { opacity: 1, scale: 1 } : undefined}
+          transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <svg className="current-image" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
             <defs>
               <clipPath id="hero-wave-clip" clipPathUnits="userSpaceOnUse">
-                <path d="M -80 685 C 250 640 455 565 665 430 C 900 280 1055 325 1245 150 C 1390 18 1535 -25 1680 -60 L 1680 820 C 1475 790 1325 750 1150 690 C 960 625 820 585 655 615 C 425 650 220 720 -80 755 Z" />
+                <path d="M -80 765 C 145 780 350 720 545 625 C 690 555 770 450 890 415 C 955 396 990 440 1050 410 C 1160 356 1185 270 1260 205 C 1380 100 1500 42 1680 -70 L 1680 980 L -80 980 Z" />
               </clipPath>
             </defs>
-            <image href="/images/monsoon-wave-v2.png" width="1600" height="760" preserveAspectRatio="xMidYMid slice" clipPath="url(#hero-wave-clip)" />
-            <rect width="1600" height="760" fill="url(#hero-wave-shade)" clipPath="url(#hero-wave-clip)" />
+            <image href="/images/monsoon-wave-v2.png" width="1600" height="900" preserveAspectRatio="xMidYMid slice" clipPath="url(#hero-wave-clip)" />
+            <rect width="1600" height="900" fill="url(#hero-wave-shade)" clipPath="url(#hero-wave-clip)" />
             <defs>
               <linearGradient id="hero-wave-shade" x1="0" y1="1" x2="1" y2="0">
                 <stop offset="0" stopColor="#11110f" stopOpacity=".08" />
@@ -113,19 +123,13 @@ export default function Home() {
               </linearGradient>
             </defs>
           </svg>
-          <span className="current-note note-a">No gatekeepers · no spectators</span>
-          <span className="current-note note-b">Built in Bombay / shared everywhere</span>
-          <span className="current-note note-c">Signal over noise · since 2023</span>
-        </div>
+        </motion.div>
 
-        <h1 className="hero-title" aria-label="Mumbai's builder community">
-          <span className="mask"><motion.i custom={0} variants={reveal} initial="hidden" animate={loaded ? "show" : "hidden"}>Mumbai’s</motion.i></span>
-          <span className="mask word-build"><motion.i custom={1} variants={reveal} initial="hidden" animate={loaded ? "show" : "hidden"}>builder</motion.i></span>
+        <h1 className="hero-title" aria-label="Where founders meet">
+          <span className="mask word-where"><motion.i custom={0} variants={reveal} initial="hidden" animate={loaded ? "show" : "hidden"}>Proxima</motion.i></span>
+          <span className="mask word-founders"><motion.i custom={1} variants={reveal} initial="hidden" animate={loaded ? "show" : "hidden"}>Mumbai</motion.i></span>
+
         </h1>
-
-        <motion.p className="hero-intro" initial={{ opacity: 0, y: 20 }} animate={loaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ delay: 0.42, duration: 0.8 }}>
-          A high-trust room for founders, engineers, researchers and designers building the next important thing—from Mumbai.
-        </motion.p>
 
         <div className="hero-metrics" aria-label="Community metrics">
           <motion.div className="metric metric-events" initial={{ opacity: 0, y: 20 }} animate={loaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ delay: 0.56 }}>
@@ -142,8 +146,8 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <a className="hero-cta magnetic" href="#join"><span>Enter the room</span><Arrow /></a>
-        <span className="scroll-note">Scroll into the current ↓</span>
+        <a className="hero-cta magnetic" href="#join"><span>Enter the room</span></a>
+
       </section>
 
       <section className="manifesto" id="about" aria-labelledby="about-title">
@@ -239,7 +243,7 @@ export default function Home() {
         <div className="section-kicker">Open doors / selective signal</div>
         <h2>Bring the thing<br />you can’t stop<br /><em>thinking about.</em></h2>
         <p>Proxima is for people already in motion. Tell us what you’re building, learning or trying to make true.</p>
-        <a href="mailto:hello@proxima.mumbai?subject=I%20want%20in" className="join-link magnetic">Request an introduction <Arrow /></a>
+        <a href="mailto:hello@proxima.mumbai?subject=I%20want%20in" className="join-link magnetic">Request an introduction</a>
         <div className="join-meta">Mumbai, India · Independent · Founder-led<br />Responses within seven working days</div>
       </section>
 
@@ -249,7 +253,7 @@ export default function Home() {
         <div><a href="#resources">Field notes</a><a href="#timeline">Next room</a><a href="mailto:hello@proxima.mumbai">Email us</a></div>
         <small>© 2026 Proxima Mumbai<br />19.0760° N / 72.8777° E</small>
       </footer>
-      </motion.div>
+      </div>
     </main>
   );
 }
