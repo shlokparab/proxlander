@@ -34,13 +34,18 @@ button { color: inherit; font: inherit; }
 .brand { display: flex; align-items: center; gap: 11px; font-size: 12px; letter-spacing: -.02em; line-height: .92; }
 .brand-shape { width: 17px; height: 17px; display: block; border-radius: 50%; background: var(--copper); }
 .mast-center { position: absolute; left: 50%; transform: translateX(-50%); line-height: 1.55; text-align: center; color: var(--muted); }
-.menu-button { position: fixed; z-index: 90; top: 19px; right: 3vw; padding: 11px 14px 10px; border: 1px solid rgba(17,17,15,.32); border-radius: 0; background: var(--paper); box-shadow: 0 6px 22px rgba(0,0,0,.12); color: var(--ink); cursor: pointer; font-size: 10px; font-weight: 700; letter-spacing: .11em; line-height: 1; text-transform: uppercase; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease; }
-.menu-button:hover { border-color: var(--copper); color: var(--copper); transform: translateY(-1px); }
-.menu-button-open { border-color: rgba(244,241,233,.32); background: rgba(244,241,233,.96); color: var(--ink) !important; }
-.nav-orbit { position: fixed; z-index: 80; inset: 0; padding: 12vh 8vw; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; gap: 4px; background: var(--ink); color: var(--paper); transform-origin: 100% 0; }
-.nav-orbit::before { content: "PROXIMA / MUMBAI"; position: absolute; top: 30px; left: 3vw; color: var(--copper-light); font-size: 9px; letter-spacing: .2em; }
-.nav-orbit a { font-family: Georgia, "Times New Roman", serif; font-size: clamp(3rem, 7vw, 7.5rem); line-height: .92; letter-spacing: -.065em; transition: color .15s ease; }
-.nav-orbit a:hover { color: var(--copper); }
+.menu-button { position: fixed; z-index: 90; top: 18px; right: 3vw; min-width: 118px; padding: 11px 15px 10px; display: inline-flex; align-items: center; justify-content: space-between; gap: 18px; border: 1px solid rgba(17,17,15,.18); border-radius: 999px; background: rgba(244,241,233,.72); box-shadow: 0 10px 32px rgba(17,17,15,.12), inset 0 1px 0 rgba(255,255,255,.72); color: var(--ink); cursor: pointer; font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 9px; font-weight: 650; letter-spacing: .13em; line-height: 1; text-transform: uppercase; backdrop-filter: blur(18px) saturate(145%); -webkit-backdrop-filter: blur(18px) saturate(145%); transition: color .22s ease, background .22s ease, border-color .22s ease, transform .22s ease, box-shadow .22s ease; }
+.menu-button::after { content: "↗"; font-size: 13px; font-weight: 400; letter-spacing: 0; line-height: .7; transition: transform .25s ease; }
+.menu-button:hover { border-color: rgba(17,17,15,.42); box-shadow: 0 14px 38px rgba(17,17,15,.16), inset 0 1px 0 rgba(255,255,255,.8); color: var(--ink); transform: translateY(-2px); }
+.menu-button:focus-visible { outline: 1px solid rgba(255,255,255,.72); outline-offset: 3px; }
+.menu-button-open { border-color: rgba(255,255,255,.28); background: rgba(17,17,15,.36); box-shadow: 0 14px 42px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.14); color: var(--paper) !important; }
+.menu-button-open::after { transform: rotate(90deg); }
+.nav-orbit { position: fixed; z-index: 80; inset: 0; padding: 12vh 8vw 8vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; gap: 0; overflow: hidden; background: rgba(5,5,5,.84); color: var(--paper); backdrop-filter: blur(56px) saturate(60%); will-change: opacity; }
+.nav-orbit::before { content: "PROXIMA / MUMBAI\A FIND YOUR ORBIT"; position: absolute; top: 76px; left: 3vw; color: rgba(244,241,233,.72); font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 8px; font-weight: 650; letter-spacing: .2em; line-height: 1.7; white-space: pre; }
+.nav-orbit a { position: relative; width: min(720px, 78vw); padding: 13px 2px 12px 54px; display: flex; justify-content: flex-end; align-items: baseline; border-bottom: 1px solid rgba(244,241,233,.17); font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: clamp(2.25rem, 5.7vw, 6.2rem); font-weight: 520; line-height: .92; letter-spacing: -.06em; text-transform: uppercase; transition: color .2s ease, padding-right .25s ease, border-color .2s ease; }
+.nav-orbit a::before { position: absolute; left: 2px; bottom: 17px; color: rgba(244,241,233,.48); font-size: 8px; font-weight: 650; letter-spacing: .16em; }
+.nav-orbit a:nth-child(1)::before { content: "01"; }.nav-orbit a:nth-child(2)::before { content: "02"; }.nav-orbit a:nth-child(3)::before { content: "03"; }.nav-orbit a:nth-child(4)::before { content: "04"; }.nav-orbit a:nth-child(5)::before { content: "05"; }.nav-orbit a:nth-child(6)::before { content: "06"; }
+.nav-orbit a:hover { padding-right: 18px; border-color: rgba(255,255,255,.52); color: #fff; }
 
 .hero { position: relative; height: 100svh; min-height: 760px; overflow: hidden; isolation: isolate; background: var(--paper); }
 .hero-current { position: absolute; z-index: 2; inset: 0 -2vw 0 -2vw; width: 104vw; height: 100%; overflow: visible; pointer-events: none; will-change: clip-path, transform; }
@@ -52,6 +57,7 @@ button { color: inherit; font: inherit; }
 .word-founders { top: 235px; left: 4vw; font-size: clamp(5.2rem, 8.8vw, 9rem); }
 .word-founders i { font-style: italic; }
 .word-meet { top: 375px; left: 4vw; font-size: clamp(5.6rem, 11vw, 11.5rem); }
+.hero-tagline { position: absolute; z-index: 14; top: 385px; left: 4vw; width: min(430px, 40vw); margin: 0; color: rgba(17,17,15,.68); font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.05rem, 1.35vw, 1.3rem); font-style: italic; font-weight: 400; letter-spacing: -.025em; line-height: 1.35; }
 .hero-metrics { position: absolute; z-index: 12; right: 4vw; bottom: 58px; width: min(230px, 18vw); display: flex; flex-direction: column; align-items: stretch; gap: 18px; }
 .hero-metrics .metric { position: static; display: flex; flex-direction: column; align-items: flex-end; color: #fff; line-height: .88; text-align: right; text-shadow: 0 1px 9px rgba(0,0,0,.72); }
 .metric strong { font-family: Georgia, "Times New Roman", serif; font-size: clamp(3rem, 3.8vw, 4.25rem); font-weight: 400; letter-spacing: -.055em; }
@@ -146,6 +152,7 @@ footer small { color: #b8b4ab; font-size: 8px; line-height: 1.8; letter-spacing:
   .word-where { top: 100px; left: 4vw; font-size: 13vw; }
   .word-founders { top: 195px; left: 4vw; font-size: 13.5vw; }
   .word-meet { top: 310px; left: 4vw; font-size: 18vw; }
+  .hero-tagline { top: 335px; left: 4vw; width: min(330px, 54vw); }
   .hero-cta { top: 450px; left: 4vw; width: min(235px, 45vw); }
   .scroll-note { bottom: 185px; }
   .hero-metrics { top: auto; right: 4vw; bottom: 46px; width: 190px; gap: 17px; }.metric strong { font-size: 3rem; }.metric span { font-size: 7px; }
@@ -161,9 +168,10 @@ footer small { color: #b8b4ab; font-size: 8px; line-height: 1.8; letter-spacing:
 }
 
 @media (max-width: 520px) {
-  .nav-orbit { padding: 12vh 6vw; }.nav-orbit a { font-size: 15vw; }
+  .nav-orbit { padding: 12vh 6vw 8vh; }.nav-orbit::before { top: 72px; left: 6vw; }.nav-orbit a { width: 88vw; padding: 13px 0 12px 34px; font-size: 13vw; }.nav-orbit a::before { bottom: 15px; }
   .hero { height: 100svh; min-height: 780px; }.hero-current { inset: 0 -24vw 0 -24vw; width: 148vw; height: 100%; }
   .word-where { top: 95px; left: 4vw; font-size: 16vw; }.word-founders { top: 165px; left: 4vw; font-size: 14vw; }.word-meet { top: 230px; left: 4vw; font-size: 21vw; }
+  .hero-tagline { top: 235px; left: 4vw; width: 68vw; font-size: .95rem; line-height: 1.35; }
   .hero-cta { top: 335px; left: 4vw; width: 46vw; min-width: 0; }
   .scroll-note { display: none; }
   .hero-metrics { top: auto; right: 4vw; bottom: 28px; width: 42vw; gap: 14px; }.metric strong { font-size: 2.4rem; }.metric span { margin-top: 5px; font-size: 6px; }

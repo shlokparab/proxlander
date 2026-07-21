@@ -91,13 +91,25 @@ export default function Home() {
         <button className={`menu-button${menuOpen ? " menu-button-open" : ""}`} onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="main-nav">
           {menuOpen ? "Close" : "Navigate"}
         </button>
-        <motion.nav id="main-nav" className="nav-orbit" animate={{ scale: menuOpen ? 1 : 0, opacity: menuOpen ? 1 : 0 }} initial={false}>
-          <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-          <a href="#groups" onClick={() => setMenuOpen(false)}>Groups</a>
-          <a href="#timeline" onClick={() => setMenuOpen(false)}>Timeline</a>
-          <a href="#resources" onClick={() => setMenuOpen(false)}>Resources</a>
-          <a href="#members" onClick={() => setMenuOpen(false)}>People</a>
-          <a href="#join" onClick={() => setMenuOpen(false)}>Join</a>
+        <motion.nav
+          id="main-nav"
+          className={`nav-orbit${menuOpen ? " nav-orbit-open" : ""}`}
+          animate={{
+            opacity: menuOpen ? 1 : 0,
+          }}
+          transition={reduceMotion ? { duration: 0 } : {
+            opacity: { duration: menuOpen ? 0.26 : 0.2, ease: "linear" },
+          }}
+          initial={false}
+          aria-hidden={!menuOpen}
+          style={{ pointerEvents: menuOpen ? "auto" : "none" }}
+        >
+          <a href="#about" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>About</a>
+          <a href="#groups" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Groups</a>
+          <a href="#timeline" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Timeline</a>
+          <a href="#resources" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Resources</a>
+          <a href="#members" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>People</a>
+          <a href="#join" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Join</a>
         </motion.nav>
       </header>
 
@@ -111,10 +123,11 @@ export default function Home() {
           <svg className="current-image" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
             <defs>
               <clipPath id="hero-wave-clip" clipPathUnits="userSpaceOnUse">
-                <path d="M -80 765 C 145 780 350 720 545 625 C 690 555 770 450 890 415 C 955 396 990 440 1050 410 C 1160 356 1185 270 1260 205 C 1380 100 1500 42 1680 -70 L 1680 980 L -80 980 Z" />
+                <path d="M -80 765 C 145 780 350 720 545 625 C 690 555 770 420 880 330 C 950 272 1005 290 1065 235 C 1170 140 1235 72 1320 20 C 1430 -45 1540 -80 1680 -100 L 1680 980 L -80 980 Z" />
               </clipPath>
             </defs>
-            <image href="/images/monsoon-wave-v2.png" width="1600" height="900" preserveAspectRatio="xMidYMid slice" clipPath="url(#hero-wave-clip)" />
+            <rect width="1600" height="900" fill="#11110f" clipPath="url(#hero-wave-clip)" />
+            <image href="/images/monsoon-wave-v2.png" x="32" y="260" width="1696" height="954" preserveAspectRatio="xMaxYMin slice" clipPath="url(#hero-wave-clip)" />
             <rect width="1600" height="900" fill="url(#hero-wave-shade)" clipPath="url(#hero-wave-clip)" />
             <defs>
               <linearGradient id="hero-wave-shade" x1="0" y1="1" x2="1" y2="0">
@@ -130,6 +143,10 @@ export default function Home() {
           <span className="mask word-founders"><motion.i custom={1} variants={reveal} initial="hidden" animate={loaded ? "show" : "hidden"}>Mumbai</motion.i></span>
 
         </h1>
+
+        <motion.p className="hero-tagline" initial={{ opacity: 0, y: 12 }} animate={loaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }} transition={{ delay: 0.52, duration: 0.5 }}>
+          A founder community for people already in motion.
+        </motion.p>
 
         <div className="hero-metrics" aria-label="Community metrics">
           <motion.div className="metric metric-events" initial={{ opacity: 0, y: 20 }} animate={loaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ delay: 0.56 }}>
