@@ -1,7 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { companies } from "./data/companies";
 
 const groups = [
   { name: "AI systems", note: "agents · infra · evals", members: "218" },
@@ -26,11 +28,6 @@ const resources = [
   { index: "04", title: "Rooms over audiences", meta: "Community memo · 5 min" },
 ];
 
-const memberNames = [
-  "Aditi", "Vishal", "Anushka", "Naman", "Rhea", "Shaan", "Meher", "Arjun",
-  "Kavya", "Dhruv", "Tanvi", "Kabir", "Mihir", "Zoya", "Aarav", "Maya",
-];
-
 const reveal: Variants = {
   hidden: { y: "28%", opacity: 0 },
   show: (i: number) => ({
@@ -44,13 +41,27 @@ function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
 
+function SocialIcon({ name }: { name: "x" | "linkedin" | "youtube" }) {
+  if (name === "x") {
+    return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22H17l-4.9-6.4L6.5 22H3.4l7.2-8.3L2.8 2h6.4l4.4 5.8L18.9 2Zm-1.1 17.9h1.7L8.3 4H6.5l11.3 15.9Z" /></svg>;
+  }
+
+  if (name === "linkedin") {
+    return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.2 1.4-2.2 2.9v5.7H9.3V9h3.5v1.6c.5-.9 1.7-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.3ZM5.3 7.4a2.1 2.1 0 1 1 0-4.1 2.1 2.1 0 0 1 0 4.1ZM7.1 20.5H3.5V9h3.6v11.5Z" /></svg>;
+  }
+
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z" /></svg>;
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const id = window.setTimeout(() => setLoaded(true), reduceMotion ? 0 : 520);
+    const hasSeenEntry = window.sessionStorage.getItem("proxima-entry-seen") === "true";
+    if (!hasSeenEntry) window.sessionStorage.setItem("proxima-entry-seen", "true");
+    const id = window.setTimeout(() => setLoaded(true), reduceMotion || hasSeenEntry ? 0 : 520);
     return () => window.clearTimeout(id);
   }, [reduceMotion]);
 
@@ -87,13 +98,12 @@ export default function Home() {
           <span className="brand-shape" />
           <span>proxima<br />mumbai</span>
         </a>
-        <div className="mast-center">19.0760° N / 72.8777° E<br />Friday, builders online</div>
         <button className={`menu-button${menuOpen ? " menu-button-open" : ""}`} onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="main-nav">
           {menuOpen ? "Close" : "Navigate"}
         </button>
         <motion.nav
           id="main-nav"
-          className={`nav-orbit${menuOpen ? " nav-orbit-open" : ""}`}
+          className={`site-nav${menuOpen ? " site-nav-open" : ""}`}
           animate={{
             opacity: menuOpen ? 1 : 0,
           }}
@@ -108,7 +118,7 @@ export default function Home() {
           <a href="#groups" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Groups</a>
           <a href="#timeline" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Timeline</a>
           <a href="#resources" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Resources</a>
-          <a href="#members" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>People</a>
+          <Link href="/companies" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Companies</Link>
           <a href="#join" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Join</a>
         </motion.nav>
       </header>
@@ -156,7 +166,7 @@ export default function Home() {
             <strong>₹18.4Cr</strong><span>raised by members</span>
           </motion.div>
           <motion.div className="metric metric-people" initial={{ opacity: 0, y: 20 }} animate={loaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ delay: 0.76 }}>
-            <strong>1,280</strong><span>members in orbit</span>
+            <strong>1,280</strong><span>members building</span>
           </motion.div>
           <motion.div className="metric metric-startups" initial={{ opacity: 0, y: 20 }} animate={loaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }} transition={{ delay: 0.86 }}>
             <strong>64</strong><span>startups building</span>
@@ -164,6 +174,15 @@ export default function Home() {
         </div>
 
         <a className="hero-cta magnetic" href="#join"><span>Enter the room</span></a>
+
+        <motion.div className="hero-under-cta" initial={{ opacity: 0, y: 10 }} animate={loaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ delay: .68, duration: .45 }}>
+          <nav className="hero-socials" aria-label="Proxima Mumbai social profiles">
+            <a href="https://x.com/ProximaMumbai" target="_blank" rel="noreferrer" aria-label="Proxima Mumbai on X"><SocialIcon name="x" /></a>
+            <a href="https://www.linkedin.com/company/proxima-mumbai" target="_blank" rel="noreferrer" aria-label="Proxima Mumbai on LinkedIn"><SocialIcon name="linkedin" /></a>
+            <a href="https://www.youtube.com/@ProximaMumbai" target="_blank" rel="noreferrer" aria-label="Proxima Mumbai on YouTube"><SocialIcon name="youtube" /></a>
+          </nav>
+          <div className="hero-backer"><span>Backed by</span><strong>3FVC</strong></div>
+        </motion.div>
 
       </section>
 
@@ -240,19 +259,21 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="members" id="members">
-        <div className="section-kicker">04 / The people in the room</div>
-        <h2>Builders are the<br /><em>best infrastructure.</em></h2>
-        <div className="member-orbit" aria-label="A selection of Proxima members">
+      <section className="members" id="companies">
+        <div className="section-kicker">04 / The companies in the room</div>
+        <h2>The work is the<br /><em>clearest signal.</em></h2>
+        <div className="member-showcase" aria-label="Companies being built inside Proxima">
           <div className="member-photo" />
-          {memberNames.map((name, index) => (
-            <span
-              key={name}
+          {companies.map((company, index) => (
+            <Link
+              href={`/companies/${company.slug}`}
+              key={company.slug}
               className={`member-name member-name-${index + 1}`}
-            >{name}</span>
+            >{company.name}</Link>
           ))}
-          <span className="member-count">+1,264 more<br />shipping quietly</span>
+          <span className="member-count">17 companies<br />one room</span>
         </div>
+        <Link className="members-link" href="/companies">Explore the companies <Arrow /></Link>
       </section>
 
       <section className="join" id="join">
@@ -267,8 +288,8 @@ export default function Home() {
       <footer>
         <a className="brand footer-brand" href="#top"><span className="brand-shape" /><span>proxima<br />mumbai</span></a>
         <p>Good people.<br />Hard problems.<br />No spectators.</p>
-        <div><a href="#resources">Field notes</a><a href="#timeline">Next room</a><a href="mailto:hello@proxima.mumbai">Email us</a></div>
-        <small>© 2026 Proxima Mumbai<br />19.0760° N / 72.8777° E</small>
+        <div><Link href="/companies">Companies</Link><a href="#timeline">Next room</a><a href="mailto:hello@proxima.mumbai">Email us</a></div>
+        <small>© 2026 Proxima Mumbai</small>
       </footer>
       </div>
     </main>
