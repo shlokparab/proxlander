@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     default: "Proxima Mumbai — Founder Community and Startup Network",
     template: "%s | Proxima Mumbai",
   },
-  description: "Proxima Mumbai is a high-trust founder community and startup network for ambitious technology companies, engineers, researchers, and builders in Mumbai.",
+  description: "Proxima Mumbai is a high-trust founder network connecting ambitious Bombay builders to grants of up to ₹10 lakh with 3F.VC, national communities, and direct paths to capital.",
   metadataBase: new URL("https://www.proximamumbai.com"),
   applicationName: "Proxima Mumbai",
   alternates: { canonical: "/" },
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   openGraph: {
     title: "Proxima Mumbai — Mumbai’s builder network, in public.",
-    description: "Small rooms. Useful artifacts. Relationships that compound.",
+    description: "Mumbai founders, a high-signal national network, and direct paths to early capital—including grants of up to ₹10 lakh with 3F.VC.",
     type: "website",
     url: "/",
     siteName: "Proxima Mumbai",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Proxima Mumbai",
-    description: "Mumbai’s builder network, in public.",
+    description: "Mumbai founders, a high-signal national network, and direct paths to early capital.",
     images: ["/og.png"],
   },
 };
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         name: "Proxima Mumbai",
         url: "https://www.proximamumbai.com",
         logo: "https://www.proximamumbai.com/og.png",
-        description: "A high-trust founder community and startup network in Mumbai.",
+        description: "A high-trust Mumbai founder network connecting ambitious builders to national communities and early capital.",
         sameAs: ["https://www.linkedin.com/company/proxima-mumbai", "https://x.com/ProximaMumbai", "https://www.youtube.com/@ProximaMumbai"],
         address: { "@type": "PostalAddress", addressLocality: "Mumbai", addressRegion: "Maharashtra", addressCountry: "IN" },
       },
@@ -54,7 +54,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   };
 
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
         <PageTransition />

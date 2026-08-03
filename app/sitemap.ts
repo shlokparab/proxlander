@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { companies } from "./data/companies";
 
 const BASE_URL = "https://www.proximamumbai.com";
-const LAST_UPDATED = new Date("2026-07-22T00:00:00.000Z");
+const LAST_UPDATED = new Date("2026-07-29T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

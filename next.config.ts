@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "media.proximamumbai.com",
         pathname: "/founders/**",
       },
+      {
+        protocol: "https",
+        hostname: "media.proximamumbai.com",
+        pathname: "/comps/**",
+      },
     ],
   },
 };

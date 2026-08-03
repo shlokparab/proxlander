@@ -18,6 +18,9 @@ export async function generateMetadata({ params }: CompanyPageProps): Promise<Me
   const people = company.founders.map((founder) => founder.name).join(", ");
   const title = `${company.name}: Company, Team & What It Builds`;
   const description = `${company.description}${people ? ` Meet ${people} and learn how ${company.name} is connected to Proxima Mumbai.` : ` Learn how ${company.name} is connected to Proxima Mumbai.`}`;
+  const socialImage = company.image
+    ? { url: company.image, alt: `${company.name} — Proxima Mumbai company profile` }
+    : { url: "/og.png", width: 1729, height: 910, alt: `${company.name} — Proxima Mumbai company profile` };
   return {
     title: { absolute: `${title} | Proxima Mumbai` },
     description,
@@ -29,13 +32,13 @@ export async function generateMetadata({ params }: CompanyPageProps): Promise<Me
       description,
       url: `/companies/${company.slug}`,
       type: "article",
-      images: [{ url: "/og.png", width: 1729, height: 910, alt: `${company.name} — Proxima Mumbai company profile` }],
+      images: [socialImage],
     },
     twitter: {
       card: "summary_large_image",
       title: `${company.name} — Proxima Mumbai`,
       description,
-      images: ["/og.png"],
+      images: [company.image ?? "/og.png"],
     },
   };
 }
@@ -57,6 +60,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
     name: company.name,
     alternateName: company.aliases,
     description: company.description,
+    image: company.image,
     url: company.website ?? canonicalUrl,
     mainEntityOfPage: canonicalUrl,
     sameAs: company.website ? [company.website] : undefined,
@@ -72,6 +76,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
     url: canonicalUrl,
     name: `${company.name}: Company, Team & What It Builds`,
     description: company.description,
+    primaryImageOfPage: company.image ? { "@type": "ImageObject", url: company.image } : undefined,
     isPartOf: { "@type": "WebSite", name: "Proxima Mumbai", url: "https://www.proximamumbai.com" },
     mainEntity: { "@id": `${canonicalUrl}#organization` },
     breadcrumb: {
@@ -161,7 +166,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
       <footer>
         <Link className="brand footer-brand" href="/"><span className="brand-shape" /><span>proxima<br />mumbai</span></Link>
         <p>Good companies.<br />Hard problems.<br />No theatre.</p>
-        <div><Link href="/companies">Companies</Link><Link href="/#timeline">Next room</Link><a href="mailto:hello@proxima.mumbai">Email us</a></div>
+        <div><Link href="/companies">Companies</Link><Link href="/#grants">Founder grants</Link><a href="mailto:hello@proxima.mumbai">Email us</a></div>
         <small>© 2026 Proxima Mumbai</small>
       </footer>
     </main>

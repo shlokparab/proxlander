@@ -5,27 +5,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { companies } from "./data/companies";
 
-const groups = [
-  { name: "AI systems", note: "agents · infra · evals", members: "218" },
-  { name: "Consumer craft", note: "products people keep", members: "184" },
-  { name: "Climate / city", note: "Mumbai as a testbed", members: "96" },
-  { name: "Fintech", note: "money that moves better", members: "142" },
-  { name: "Design engineering", note: "taste, code, systems", members: "127" },
-  { name: "Deep tech", note: "atoms over demos", members: "73" },
-];
+const founderSignals = ["Y Combinator", "Entrepreneur First", "WTFund", "Antler", "Pebblebed", "Hive Mind Capital", "Emergent Ventures", "Offscript Ventures", "Accel"];
 
-const events = [
-  { day: "19", month: "JUL", title: "Agents after dark", place: "Bandra West · 19:30", type: "Live teardown" },
-  { day: "27", month: "JUL", title: "Founders’ table Nº12", place: "Fort · 20 seats", type: "Dinner" },
-  { day: "02", month: "AUG", title: "Build night: interfaces", place: "Lower Parel · 18:00", type: "Open studio" },
-  { day: "17", month: "AUG", title: "Monsoon demo room", place: "By invitation · Mumbai", type: "Show & tell" },
-];
-
-const resources = [
-  { index: "01", title: "Mumbai founder map", meta: "Living directory · 11 min" },
-  { index: "02", title: "Raising without theatre", meta: "Field note · 7 min" },
-  { index: "03", title: "The agent stack we trust", meta: "Working doc · 18 tools" },
-  { index: "04", title: "Rooms over audiences", meta: "Community memo · 5 min" },
+const domains = [
+  { index: "01", name: "Deep tech", note: "Science that leaves the lab" },
+  { index: "02", name: "AI", note: "Models, agents and infrastructure" },
+  { index: "03", name: "Hardware", note: "Robots, chips and real-world systems" },
+  { index: "04", name: "Consumer", note: "Brands people choose and remember" },
+  { index: "05", name: "Media", note: "Culture, storytelling and distribution" },
 ];
 
 const reveal: Variants = {
@@ -114,10 +101,10 @@ export default function Home() {
           aria-hidden={!menuOpen}
           style={{ pointerEvents: menuOpen ? "auto" : "none" }}
         >
-          <a href="#about" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>About</a>
-          <a href="#groups" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Groups</a>
-          <a href="#timeline" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Timeline</a>
-          <a href="#resources" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Resources</a>
+          <a href="#thesis" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Why Proxima</a>
+          <a href="#grants" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Grants</a>
+          <a href="#network" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Network</a>
+          <a href="#talent" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Talent</a>
           <Link href="/companies" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Companies</Link>
           <a href="#join" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Join</a>
         </motion.nav>
@@ -181,89 +168,81 @@ export default function Home() {
             <a href="https://www.linkedin.com/company/proxima-mumbai" target="_blank" rel="noreferrer" aria-label="Proxima Mumbai on LinkedIn"><SocialIcon name="linkedin" /></a>
             <a href="https://www.youtube.com/@ProximaMumbai" target="_blank" rel="noreferrer" aria-label="Proxima Mumbai on YouTube"><SocialIcon name="youtube" /></a>
           </nav>
-          <div className="hero-backer"><span>Backed by</span><strong>3FVC</strong></div>
+          <div className="hero-backer"><span>Founder grants with</span><strong>3F.VC · up to ₹10L</strong></div>
         </motion.div>
 
       </section>
 
-      <section className="manifesto" id="about" aria-labelledby="about-title">
-        <div className="section-kicker">Proxima Mumbai / Bombay</div>
-        <div className="manifesto-grid">
-          <motion.h2 id="about-title" initial={{ opacity: 0.2, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }}>
-            Where founders<br /><em>gather.</em>
+      <section className="home-thesis" id="thesis" aria-labelledby="thesis-title">
+        <div className="section-kicker">01 / The Proxima advantage</div>
+        <div className="home-thesis-grid">
+          <motion.h2 id="thesis-title" initial={{ opacity: 0.2, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }}>
+            A strong idea.<br />The resolve<br /><em>to ship.</em>
           </motion.h2>
-          <div className="manifesto-copy">
-            <p className="manifesto-deck">An intimate founder community where ambition meets creativity in the heart of Bombay.</p>
-            <p>Proxima curates a tech-founder community through hackathons and monthly meetups with VCs. Collaborations with universities provide dedicated spaces for networking and building ventures.</p>
-            <p>We believe in the power of intimate gatherings, thoughtful discourse, and the magic that happens when ambitious minds collide in a space that feels like home.</p>
+          <div className="home-thesis-copy">
+            <p className="home-thesis-deck">Start there. Proxima helps you find the rest.</p>
+            <p>We bring ambitious Mumbai founders into a high-trust network, connect that network to some of India’s strongest builder communities, and create direct paths to early capital.</p>
+            <p>No matter the domain, the point is the same: fewer cold starts, better people around the table, and more momentum behind work that deserves to exist.</p>
           </div>
         </div>
-        <div className="manifesto-side">Small rooms · thoughtful discourse · ambitious minds</div>
-      </section>
-
-      <section className="groups section-dark" id="groups">
-        <div className="section-kicker">01 / Working groups · always on</div>
-        <h2>Six currents.<br /><em>One city.</em></h2>
-        <div className="group-current" role="list">
-          {groups.map((group, index) => (
-            <motion.a
-              href="#join"
-              className={`group group-${index + 1}`}
-              key={group.name}
-              role="listitem"
-              whileHover={{ x: index % 2 ? -10 : 10 }}
-              whileFocus={{ scale: 1.04 }}
-            >
-              <span className="group-index">0{index + 1}</span>
-              <strong>{group.name}</strong>
-              <small>{group.note} · {group.members} people</small>
-            </motion.a>
-          ))}
-        </div>
-        <div className="orange-pool">Find<br />your<br /><i>people.</i></div>
-      </section>
-
-      <section className="timeline" id="timeline">
-        <div className="timeline-river" />
-        <div className="section-kicker">02 / Next in Mumbai · July → August</div>
-        <h2>Things worth<br /><em>leaving home for.</em></h2>
-        <div className="events-flow">
-          {events.map((event, index) => (
-            <a
-              href="#join"
-              className={`event event-${index + 1}`}
-              key={event.title}
-            >
-              <span className="event-date"><b>{event.day}</b>{event.month}</span>
-              <span className="event-copy"><small>{event.type}</small><strong>{event.title}</strong><i>{event.place}</i></span>
-              <Arrow />
-            </a>
-          ))}
+        <div className="home-thesis-proof" aria-label="What Proxima provides">
+          <div><span>01</span><strong>Mumbai-rooted</strong><small>A real local founder network</small></div>
+          <div><span>02</span><strong>India-connected</strong><small>Trusted community pathways</small></div>
+          <div><span>03</span><strong>Capital-accessible</strong><small>Direct routes to early funding</small></div>
         </div>
       </section>
 
-      <section className="resources section-dark" id="resources">
-        <div className="resource-glow" />
-        <div className="section-kicker">03 / Open source intelligence</div>
-        <h2>Useful things,<br /><em>left in the open.</em></h2>
-        <p className="resource-intro">Notes, maps and operating knowledge from inside the community. No lead form. No content theatre.</p>
-        <div className="resource-flow">
-          {resources.map((resource, index) => (
-            <motion.a href="#" key={resource.title} className={`resource resource-${index + 1}`} whileHover={{ scale: 1.035 }}>
-              <span>{resource.index}</span>
-              <strong>{resource.title}</strong>
-              <small>{resource.meta}</small>
-              <Arrow />
-            </motion.a>
-          ))}
+      <section className="home-grants section-dark" id="grants" aria-labelledby="grants-title">
+        <div className="home-grants-image" role="img" aria-label="A Mumbai founder's workshop overlooking the city at night" />
+        <div className="home-grants-shade" />
+        <div className="home-grants-content">
+          <div className="section-kicker">02 / Proxima × 3F.VC</div>
+          <h2 id="grants-title">Up to<br /><em>₹10 lakh</em><br />to begin.</h2>
+          <div className="home-grants-note">
+            <strong>Founder grants for Mumbai</strong>
+            <p>We’re working with 3F.VC to back talented Mumbai founders with grants of up to ₹10 lakh. Conviction should not have to wait for permission—or a move to another city.</p>
+            <a href="mailto:hello@proxima.mumbai?subject=Proxima%20x%203F.VC%20founder%20grant">Ask about the grant <Arrow /></a>
+          </div>
+        </div>
+        <div className="home-grants-mark">₹10L</div>
+      </section>
+
+      <section className="home-network" id="network" aria-labelledby="network-title">
+        <div className="home-network-copy">
+          <div className="section-kicker">03 / A national network, close at hand</div>
+          <h2 id="network-title">One room<br />in Bombay.<br /><em>India within reach.</em></h2>
+          <p>Proxima is paired with some of the strongest communities across India. That means the trust built in Mumbai travels: to collaborators, specialist talent, operators, and founders who have solved the problem in front of you before.</p>
+          <div className="home-network-line"><span>Local trust</span><span>National reach</span><span>Warm paths</span></div>
+        </div>
+        <div className="home-network-image" role="img" aria-label="Indian founders working together around a table in Mumbai" />
+      </section>
+
+      <section className="home-talent section-dark" id="talent" aria-labelledby="talent-title">
+        <div className="section-kicker">04 / A network with receipts</div>
+        <div className="home-talent-heading">
+          <h2 id="talent-title">Built by people<br /><em>who have done it.</em></h2>
+          <p>Across the network are founders accepted into Y Combinator and backed by funds and programs including Entrepreneur First, WTFund, Antler, Pebblebed, Hive Mind Capital, Emergent Ventures, Offscript Ventures, and Accel.</p>
+        </div>
+        <div className="home-signal-list" aria-label="Funds and programs represented in the Proxima network">
+          {founderSignals.map((signal, index) => <span key={signal}><i>{String(index + 1).padStart(2, "0")}</i>{signal}</span>)}
+        </div>
+        <div className="home-domains">
+          <div className="home-domains-image" role="img" aria-label="Robotics, biotechnology, consumer products, and media tools on a maker's bench" />
+          <div className="home-domains-copy">
+            <div className="section-kicker">Every domain / one standard</div>
+            <h3>Unbelievably<br /><em>good builders.</em></h3>
+            <p>Deep tech, AI, hardware, consumer brands, and media all belong here. The common ground is ambition, technical depth, and the determination to execute.</p>
+            <div className="home-domain-list">
+              {domains.map((domain) => <div key={domain.name}><span>{domain.index}</span><strong>{domain.name}</strong><small>{domain.note}</small></div>)}
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="members" id="companies">
-        <div className="section-kicker">04 / The companies in the room</div>
-        <h2>The work is the<br /><em>clearest signal.</em></h2>
+        <div className="section-kicker">05 / The companies in the room</div>
+        <h2>Across every domain.<br /><em>One quality bar.</em></h2>
         <div className="member-showcase" aria-label="Companies being built inside Proxima">
-          <div className="member-photo" />
           {companies.map((company, index) => (
             <Link
               href={`/companies/${company.slug}`}
@@ -271,24 +250,24 @@ export default function Home() {
               className={`member-name member-name-${index + 1}`}
             >{company.name}</Link>
           ))}
-          <span className="member-count">17 companies<br />one room</span>
+          <span className="member-count">{companies.length} companies<br />one high-signal network</span>
         </div>
         <Link className="members-link" href="/companies">Explore the companies <Arrow /></Link>
       </section>
 
       <section className="join" id="join">
         <div className="join-current" />
-        <div className="section-kicker">Open doors / selective signal</div>
-        <h2>Bring the thing<br />you can’t stop<br /><em>thinking about.</em></h2>
-        <p>Proxima is for people already in motion. Tell us what you’re building, learning or trying to make true.</p>
-        <a href="mailto:hello@proxima.mumbai?subject=I%20want%20in" className="join-link magnetic">Request an introduction</a>
-        <div className="join-meta">Mumbai, India · Independent · Founder-led<br />Responses within seven working days</div>
+        <div className="section-kicker">06 / Bombay founders, start here</div>
+        <h2>Bring the idea.<br />Bring the<br /><em>determination.</em></h2>
+        <p>The network, the peers, and direct paths to capital are already here. Tell us what you’re determined to make true.</p>
+        <a href="mailto:hello@proxima.mumbai?subject=I%20am%20building%20in%20Mumbai" className="join-link magnetic">Tell us what you’re building</a>
+        <div className="join-meta">Mumbai, India · Founder-led · High trust<br />Strong ideas / serious intent / no theatre</div>
       </section>
 
       <footer>
         <a className="brand footer-brand" href="#top"><span className="brand-shape" /><span>proxima<br />mumbai</span></a>
-        <p>Good people.<br />Hard problems.<br />No spectators.</p>
-        <div><Link href="/companies">Companies</Link><a href="#timeline">Next room</a><a href="mailto:hello@proxima.mumbai">Email us</a></div>
+        <p>Good people.<br />Hard problems.<br />Real momentum.</p>
+        <div><Link href="/companies">Companies</Link><a href="#grants">Founder grants</a><a href="mailto:hello@proxima.mumbai">Email us</a></div>
         <small>© 2026 Proxima Mumbai</small>
       </footer>
       </div>

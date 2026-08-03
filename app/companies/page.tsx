@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import CompanyNavigation from "./CompanyNavigation";
 import { companies } from "../data/companies";
@@ -60,6 +61,11 @@ export default function CompaniesPage() {
             >
               <Link href={`/companies/${company.slug}`} aria-label={`View ${company.name}`}>
                 <div className="company-card-meta"><span>{String(index + 1).padStart(2, "0")}</span><span>{company.sector}</span></div>
+                <div className={`company-card-visual${company.image ? "" : " company-card-visual-placeholder"}`}>
+                  {company.image
+                    ? <Image src={company.image} alt={`${company.name} company thumbnail`} fill sizes="(max-width: 680px) 90vw, (max-width: 900px) 44vw, 29vw" />
+                    : <span aria-hidden="true">{company.name.slice(0, 2)}</span>}
+                </div>
                 <h2>{company.name}</h2>
                 <p>{company.description}</p>
                 <div className="company-card-foot">
@@ -82,7 +88,7 @@ export default function CompaniesPage() {
       <footer>
         <Link className="brand footer-brand" href="/"><span className="brand-shape" /><span>proxima<br />mumbai</span></Link>
         <p>Good companies.<br />Hard problems.<br />No theatre.</p>
-        <div><Link href="/">Home</Link><Link href="/#timeline">Next room</Link><a href="mailto:hello@proxima.mumbai">Email us</a></div>
+        <div><Link href="/">Home</Link><Link href="/#grants">Founder grants</Link><a href="mailto:hello@proxima.mumbai">Email us</a></div>
         <small>© 2026 Proxima Mumbai</small>
       </footer>
     </main>

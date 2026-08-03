@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Companies in Motion — Startups in the Proxima Mumbai Network",
-  description: "Explore 17 technology companies and startups in the Proxima Mumbai network, including Supermemory, Huddle01, Anomaly Bio, Manicule, LiteFold, Vanar Robots, and more.",
+  description: "Explore 18 technology companies and startups in the Proxima Mumbai network, including Supermemory, Huddle01, Anomaly Bio, Manicule, LiteFold, Vanar Robots, and more.",
   alternates: { canonical: "/companies" },
   keywords: ["Proxima Mumbai companies", "Mumbai startups", "Indian technology companies", "Mumbai founders", "Proxima startup network"],
   openGraph: {

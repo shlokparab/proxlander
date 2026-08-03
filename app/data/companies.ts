@@ -1,4 +1,5 @@
 const FOUNDERS_BASE_URL = "https://media.proximamumbai.com/founders";
+const COMPANIES_BASE_URL = "https://media.proximamumbai.com/comps";
 
 export type CompanyFounder = {
   name: string;
@@ -17,6 +18,7 @@ export type Company = {
   overview: [string, string];
   highlights: string[];
   website?: string;
+  image?: string;
   location?: string;
   founders: CompanyFounder[];
 };
@@ -34,6 +36,7 @@ export const companies: Company[] = [
     ],
     highlights: ["AI memory infrastructure", "Knowledge capture and recall", "Developer and consumer applications"],
     website: "https://supermemory.ai",
+    image: `${COMPANIES_BASE_URL}/supermemory.webp`,
     location: "Mumbai, India",
     founders: [{ name: "Dhravya Shah", role: "Founder", image: `${FOUNDERS_BASE_URL}/dhravya.webp`, linkedin: "https://www.linkedin.com/in/dhravyashah/", x: "https://x.com/DhravyaShah" }],
   },
@@ -49,6 +52,7 @@ export const companies: Company[] = [
     ],
     highlights: ["Real-time audio and video", "Decentralized infrastructure", "Developer communication tooling"],
     website: "https://huddle01.com",
+    image: `${COMPANIES_BASE_URL}/huddle.webp`,
     location: "India",
     founders: [{ name: "Arush Kurundodi", role: "Founding engineer", image: `${FOUNDERS_BASE_URL}/arush.webp`, linkedin: "https://www.linkedin.com/in/arushkurundodi/", x: "https://x.com/arcinston" }],
   },
@@ -64,6 +68,7 @@ export const companies: Company[] = [
     ],
     highlights: ["Microbial manufacturing", "Biotechnology and fermentation", "Ingredient supply chains"],
     website: "https://www.anomalybio.com/",
+    image: `${COMPANIES_BASE_URL}/anomaly.webp`,
     location: "Singapore / India",
     founders: [{ name: "Armaan Dhanda", role: "Co-founder", image: `${FOUNDERS_BASE_URL}/armaan.webp`, linkedin: "https://www.linkedin.com/in/armaandh/?originalSubdomain=sg", x: "https://x.com/ArmaanDhanda1" }],
   },
@@ -79,6 +84,7 @@ export const companies: Company[] = [
     ],
     highlights: ["AI-native software workflows", "Developer productivity", "Product operations"],
     website: "https://manicule.dev",
+    image: `${COMPANIES_BASE_URL}/manicule.webp`,
     location: "India",
     founders: [
       { name: "Shreyans Jain", role: "Founder", image: `${FOUNDERS_BASE_URL}/shreyans.webp`, linkedin: "https://www.linkedin.com/in/sjain07", x: "https://x.com/CodeWShreyans" },
@@ -97,6 +103,7 @@ export const companies: Company[] = [
     ],
     highlights: ["AI for drug discovery", "Life-sciences research infrastructure", "Scientific copilots"],
     website: "https://www.litefold.in/",
+    image: `${COMPANIES_BASE_URL}/litefold.webp`,
     location: "India",
     founders: [{ name: "Anindyadeep Sannigrahi", role: "Founder", image: `${FOUNDERS_BASE_URL}/anindya.webp`, linkedin: "https://www.linkedin.com/in/anindyadeep-sannigrahi-38683b1b6", x: "https://x.com/anindyadeeps" }],
   },
@@ -112,6 +119,7 @@ export const companies: Company[] = [
     ],
     highlights: ["Student-built semiconductor fab", "Open-source fabrication tools", "IIT Bombay semiconductor education"],
     website: "https://hackerfabiitb.github.io/",
+    image: `${COMPANIES_BASE_URL}/hackerfab.webp`,
     location: "IIT Bombay, Mumbai",
     founders: [
       { name: "Aryamman Bhatia", role: "Founding team" },
@@ -146,6 +154,7 @@ export const companies: Company[] = [
     ],
     highlights: ["General-purpose humanoid robotics", "In-house actuators and manipulators", "Physical intelligence for industry"],
     website: "https://www.vanarrobots.com/",
+    image: `${COMPANIES_BASE_URL}/vanar.webp`,
     location: "Mumbai, India",
     founders: [{ name: "Aryan Wagh", role: "Founder" }],
   },
@@ -177,6 +186,7 @@ export const companies: Company[] = [
       "Raeth’s connection to Proxima runs through Mumbai-based builders working across engineering and growth, extending the community into reinforcement learning and applied frontier-model research.",
     ],
     highlights: ["Reinforcement-learning environments", "Financial reasoning data", "Applied AI and automation"],
+    image: `${COMPANIES_BASE_URL}/raeth.webp`,
     location: "India",
     founders: [
       { name: "Vihan Singh", role: "Director" },
@@ -195,6 +205,7 @@ export const companies: Company[] = [
     ],
     highlights: ["Startup and investor discovery", "Venture scouting", "Founder-to-VC matching"],
     website: "https://www.raisegate.com/",
+    image: `${COMPANIES_BASE_URL}/raisegate.webp`,
     location: "Mumbai, India",
     founders: [
       { name: "Yash Panditrao", role: "CEO", image: `${FOUNDERS_BASE_URL}/yash.webp`, linkedin: "https://www.linkedin.com/in/yashpanditrao/", x: "https://x.com/yashpanditrao" },
@@ -247,18 +258,33 @@ export const companies: Company[] = [
     founders: [{ name: "Yash Gawde", role: "Founder", image: `${FOUNDERS_BASE_URL}/yashgawde.webp`, linkedin: "https://www.linkedin.com/in/yashgawde/", x: "https://x.com/bizibeast" }],
   },
   {
-    slug: "crazeposter-fun",
-    name: "CrazePoster.fun",
-    aliases: ["Craze Poster", "crazeposter.fun"],
-    sector: "Creative Internet Tool",
-    description: "CrazePoster.fun is a playful internet product in the Proxima Mumbai company network focused on making and sharing posters.",
+    slug: "craze",
+    name: "Craze",
+    aliases: ["Craze HQ", "crazehq.com", "Craze YC S22"],
+    sector: "AI / Video Editing",
+    description: "Craze is an AI video editor that helps teams turn creative direction into polished, engaging videos in minutes.",
     overview: [
-      "CrazePoster.fun is an experimental creative tool built for fast, playful poster-making on the web. It belongs to the smaller, stranger class of internet products that are easy to try and designed to spread through what people make with them.",
-      "The product is listed in Proxima Mumbai’s company network. This profile will track its public launch details as the team shares more about the product and the people behind it.",
+      "Craze is building an AI-native video editor that plans and edits around a creator’s direction, shortening the path from an idea to a finished video people want to watch.",
+      "Co-founder and CEO Kabir Nagral is part of Proxima Mumbai. Craze brings the community’s concentration of AI builders into creative software and modern video production.",
     ],
-    highlights: ["Browser-based poster making", "Creative experimentation", "Shareable internet output"],
-    website: "https://crazeposter.fun/",
-    founders: [],
+    highlights: ["AI video editing", "Creative direction and planning", "Fast video production"],
+    website: "https://www.crazehq.com/",
+    location: "Mumbai, India",
+    founders: [{ name: "Kabir Nagral", role: "Co-founder & CEO", linkedin: "https://in.linkedin.com/in/kabirnagral" }],
+  },
+  {
+    slug: "poster-fun",
+    name: "Poster.fun",
+    aliases: ["Poster", "poster.fun", "Poster dot fun"],
+    sector: "AI / Creative Tools",
+    description: "Poster.fun is an AI-powered creative platform for making memes, images, and videos without design skills.",
+    overview: [
+      "Poster.fun gives creators fast, approachable tools for generating and remixing memes, images, and videos. Its creative studio combines AI generation with templates, brand assets, and familiar editing controls.",
+      "Founder Shakti is part of Proxima Mumbai. Poster.fun connects the community to creator tooling, internet culture, and new ways for creators and brands to produce and share visual work.",
+    ],
+    highlights: ["AI memes, images, and video", "Templates and brand tools", "Creator marketplace"],
+    website: "https://poster.fun/",
+    founders: [{ name: "Shakti", role: "Founder", x: "https://x.com/cyber_shakti" }],
   },
   {
     slug: "svs-recruiting",
