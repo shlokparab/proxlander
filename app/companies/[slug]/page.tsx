@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CompanyNavigation from "../CompanyNavigation";
 import { companies, getCompany } from "../../data/companies";
+import { getSiteUrl, socialImageVersion } from "../../lib/site-url";
 
 type CompanyPageProps = { params: Promise<{ slug: string }> };
 
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: CompanyPageProps): Promise<Me
     ? `${company.name}: Funding, Stage, Team & Product`
     : `${company.name}: Company, Team & What It Builds`;
   const description = `${company.description}${people ? ` Meet ${people} and learn how ${company.name} is connected to Proxima Mumbai.` : ` Learn how ${company.name} is connected to Proxima Mumbai.`}`;
-  const socialImageUrl = `https://www.proximamumbai.com/companies/${company.slug}/opengraph-image`;
+  const socialImageUrl = `${getSiteUrl()}/companies/${company.slug}/opengraph-image?v=${socialImageVersion}`;
   return {
     title: { absolute: `${title} | Proxima Mumbai` },
     description,

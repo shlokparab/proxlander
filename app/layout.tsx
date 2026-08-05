@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import PageTransition from "./components/PageTransition";
+import { getSiteUrl, socialImageVersion } from "./lib/site-url";
 
-const siteUrl = "https://www.proximamumbai.com";
-const socialImageUrl = `${siteUrl}/og.png`;
+const siteUrl = getSiteUrl();
+const socialImageUrl = `${siteUrl}/og-whatsapp.jpg?v=${socialImageVersion}`;
 
 export const metadata: Metadata = {
   title: {
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "Proxima Mumbai",
-    images: [{ url: socialImageUrl, secureUrl: socialImageUrl, width: 1729, height: 910, type: "image/png", alt: "Proxima Mumbai — Mumbai’s builder network, in public." }],
+    images: [{ url: socialImageUrl, secureUrl: socialImageUrl, width: 1200, height: 630, type: "image/jpeg", alt: "Proxima Mumbai — Mumbai’s builder network, in public." }],
   },
   twitter: {
     card: "summary_large_image",
