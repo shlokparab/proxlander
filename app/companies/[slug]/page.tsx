@@ -20,9 +20,7 @@ export async function generateMetadata({ params }: CompanyPageProps): Promise<Me
     ? `${company.name}: Funding, Stage, Team & Product`
     : `${company.name}: Company, Team & What It Builds`;
   const description = `${company.description}${people ? ` Meet ${people} and learn how ${company.name} is connected to Proxima Mumbai.` : ` Learn how ${company.name} is connected to Proxima Mumbai.`}`;
-  const socialImage = company.image
-    ? { url: company.image, alt: `${company.name} — Proxima Mumbai company profile` }
-    : { url: "/og.png", width: 1729, height: 910, alt: `${company.name} — Proxima Mumbai company profile` };
+  const socialImageUrl = `https://www.proximamumbai.com/companies/${company.slug}/opengraph-image`;
   return {
     title: { absolute: `${title} | Proxima Mumbai` },
     description,
@@ -43,13 +41,13 @@ export async function generateMetadata({ params }: CompanyPageProps): Promise<Me
       description,
       url: `/companies/${company.slug}`,
       type: "article",
-      images: [socialImage],
+      images: [{ url: socialImageUrl, secureUrl: socialImageUrl, width: 1200, height: 630, type: "image/png", alt: `${company.name} — Proxima Mumbai company profile` }],
     },
     twitter: {
       card: "summary_large_image",
       title: `${company.name} — Proxima Mumbai`,
       description,
-      images: [company.image ?? "/og.png"],
+      images: [socialImageUrl],
     },
   };
 }

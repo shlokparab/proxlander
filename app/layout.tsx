@@ -2,17 +2,24 @@ import type { Metadata } from "next";
 import "./globals.css";
 import PageTransition from "./components/PageTransition";
 
+const siteUrl = "https://www.proximamumbai.com";
+const socialImageUrl = `${siteUrl}/og.png`;
+
 export const metadata: Metadata = {
   title: {
     default: "Proxima Mumbai — Founder Community and Startup Network",
     template: "%s | Proxima Mumbai",
   },
   description: "Proxima Mumbai is a high-trust founder network connecting ambitious Bombay builders to grants of up to ₹10 lakh with 3F.VC, national communities, and direct paths to capital.",
-  metadataBase: new URL("https://www.proximamumbai.com"),
+  metadataBase: new URL(siteUrl),
   applicationName: "Proxima Mumbai",
   icons: {
-    icon: [{ url: "/favicon.ico", type: "image/x-icon" }],
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+    ],
     shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
   },
   alternates: { canonical: "/" },
   keywords: ["Proxima Mumbai", "Mumbai founder community", "Mumbai startups", "Mumbai tech community", "Indian startup network"],
@@ -23,13 +30,13 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "Proxima Mumbai",
-    images: [{ url: "/og.png", width: 1729, height: 910, alt: "Proxima Mumbai — Mumbai’s builder network, in public." }],
+    images: [{ url: socialImageUrl, secureUrl: socialImageUrl, width: 1729, height: 910, type: "image/png", alt: "Proxima Mumbai — Mumbai’s builder network, in public." }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Proxima Mumbai",
     description: "Mumbai founders, a high-signal national network, and direct paths to early capital.",
-    images: ["/og.png"],
+    images: [socialImageUrl],
   },
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -14,8 +14,29 @@ const domains = [
   { index: "05", name: "Media", note: "Culture, storytelling and distribution" },
 ];
 
+const reveal: Variants = {
+  hidden: { y: "28%", opacity: 0 },
+  show: (i: number) => ({
+    y: 0,
+    opacity: 1,
+    transition: { delay: 0.06 + i * 0.06, duration: 0.65, ease: [0.16, 1, 0.3, 1] },
+  }),
+};
+
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
+}
+
+function SocialIcon({ name }: { name: "x" | "linkedin" | "youtube" }) {
+  if (name === "x") {
+    return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22H17l-4.9-6.4L6.5 22H3.4l7.2-8.3L2.8 2h6.4l4.4 5.8L18.9 2Zm-1.1 17.9h1.7L8.3 4H6.5l11.3 15.9Z" /></svg>;
+  }
+
+  if (name === "linkedin") {
+    return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.2 1.4-2.2 2.9v5.7H9.3V9h3.5v1.6c.5-.9 1.7-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.3ZM5.3 7.4a2.1 2.1 0 1 1 0-4.1 2.1 2.1 0 0 1 0 4.1ZM7.1 20.5H3.5V9h3.6v11.5Z" /></svg>;
+  }
+
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z" /></svg>;
 }
 
 export default function Home() {
@@ -89,6 +110,33 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
+        <motion.div
+          className="hero-current"
+          initial={reduceMotion ? false : { opacity: 0, scale: 1.01 }}
+          animate={loaded ? { opacity: 1, scale: 1 } : undefined}
+          transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <svg className="current-image" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <defs>
+              <clipPath id="hero-wave-clip" clipPathUnits="userSpaceOnUse">
+                <path d="M -80 765 C 145 780 350 720 545 625 C 690 555 770 420 880 330 C 950 272 1005 290 1065 235 C 1170 140 1235 72 1320 20 C 1430 -45 1540 -80 1680 -100 L 1680 980 L -80 980 Z" />
+              </clipPath>
+              <linearGradient id="hero-wave-shade" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0" stopColor="#11110f" stopOpacity=".08" />
+                <stop offset="1" stopColor="#11110f" stopOpacity=".28" />
+              </linearGradient>
+            </defs>
+            <rect width="1600" height="900" fill="#11110f" clipPath="url(#hero-wave-clip)" />
+            <image href="/images/monsoon-wave-v2.png" x="32" y="260" width="1696" height="954" preserveAspectRatio="xMaxYMin slice" clipPath="url(#hero-wave-clip)" />
+            <rect width="1600" height="900" fill="url(#hero-wave-shade)" clipPath="url(#hero-wave-clip)" />
+          </svg>
+        </motion.div>
+
+        <h1 className="hero-title" aria-label="Proxima Mumbai">
+          <span className="mask word-where"><motion.i custom={0} variants={reveal} initial="hidden" animate={loaded ? "show" : "hidden"}>Proxima</motion.i></span>
+          <span className="mask word-founders"><motion.i custom={1} variants={reveal} initial="hidden" animate={loaded ? "show" : "hidden"}>Mumbai</motion.i></span>
+        </h1>
+
         <motion.p className="hero-tagline" initial={{ opacity: 0, y: 12 }} animate={loaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }} transition={{ delay: 0.52, duration: 0.5 }}>
           A founder community for people already in motion.
         </motion.p>
@@ -105,6 +153,17 @@ export default function Home() {
           </motion.div>
 
         </div>
+
+        <a className="hero-cta magnetic" href="#join"><span>Enter the room</span></a>
+
+        <motion.div className="hero-under-cta" initial={{ opacity: 0, y: 10 }} animate={loaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ delay: .68, duration: .45 }}>
+          <nav className="hero-socials" aria-label="Proxima Mumbai social profiles">
+            <a href="https://x.com/ProximaMumbai" target="_blank" rel="noreferrer" aria-label="Proxima Mumbai on X"><SocialIcon name="x" /></a>
+            <a href="https://www.linkedin.com/company/proxima-mumbai" target="_blank" rel="noreferrer" aria-label="Proxima Mumbai on LinkedIn"><SocialIcon name="linkedin" /></a>
+            <a href="https://www.youtube.com/@ProximaMumbai" target="_blank" rel="noreferrer" aria-label="Proxima Mumbai on YouTube"><SocialIcon name="youtube" /></a>
+          </nav>
+          <div className="hero-backer"><span>Founder grants with</span><strong>3F.VC · up to ₹10L</strong></div>
+        </motion.div>
       </section>
 
       <section className="home-thesis" id="thesis" aria-labelledby="thesis-title">

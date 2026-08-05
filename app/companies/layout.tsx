@@ -10,7 +10,13 @@ export const metadata: Metadata = {
     description: "The companies, founders, labs, and products being built inside the Proxima Mumbai network.",
     url: "/companies",
     type: "website",
-    images: [{ url: "/og.png", width: 1729, height: 910, alt: "Companies in the Proxima Mumbai network" }],
+    images: [{ url: "https://www.proximamumbai.com/og.png", secureUrl: "https://www.proximamumbai.com/og.png", width: 1729, height: 910, type: "image/png", alt: "Companies in the Proxima Mumbai network" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Companies in Motion — Proxima Mumbai",
+    description: "The companies, founders, labs, and products being built inside the Proxima Mumbai network.",
+    images: ["https://www.proximamumbai.com/og.png"],
   },
 };
 
