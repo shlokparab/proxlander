@@ -16,7 +16,9 @@ export async function generateMetadata({ params }: CompanyPageProps): Promise<Me
   const company = getCompany(slug);
   if (!company) return {};
   const people = company.founders.map((founder) => founder.name).join(", ");
-  const title = `${company.name}: Company, Team & What It Builds`;
+  const title = company.funding || company.stage
+    ? `${company.name}: Funding, Stage, Team & Product`
+    : `${company.name}: Company, Team & What It Builds`;
   const description = `${company.description}${people ? ` Meet ${people} and learn how ${company.name} is connected to Proxima Mumbai.` : ` Learn how ${company.name} is connected to Proxima Mumbai.`}`;
   const socialImage = company.image
     ? { url: company.image, alt: `${company.name} — Proxima Mumbai company profile` }
@@ -24,7 +26,16 @@ export async function generateMetadata({ params }: CompanyPageProps): Promise<Me
   return {
     title: { absolute: `${title} | Proxima Mumbai` },
     description,
-    keywords: [company.name, ...company.aliases, `${company.name} founder`, `${company.name} company`, `${company.name} Proxima Mumbai`, company.sector],
+    keywords: [
+      company.name,
+      ...company.aliases,
+      ...company.seoKeywords,
+      `${company.name} founder`,
+      `${company.name} funding`,
+      `what does ${company.name} do`,
+      `${company.name} Proxima Mumbai`,
+      company.sector,
+    ],
     alternates: { canonical: `/companies/${company.slug}` },
     robots: { index: true, follow: true },
     openGraph: {
@@ -52,6 +63,9 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
   const previous = companies[(companyIndex - 1 + companies.length) % companies.length];
   const next = companies[(companyIndex + 1) % companies.length];
   const canonicalUrl = `https://www.proximamumbai.com/companies/${company.slug}`;
+  const profileTitle = company.funding || company.stage
+    ? `${company.name}: Funding, Stage, Team & Product`
+    : `${company.name}: Company, Team & What It Builds`;
   const founderPeople = company.founders.filter((person) => /(^|\s)(co-)?founder($|\s)|founding team/i.test(person.role));
   const organizationJsonLd = {
     "@context": "https://schema.org",
@@ -65,6 +79,15 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
     mainEntityOfPage: canonicalUrl,
     sameAs: company.website ? [company.website] : undefined,
     location: company.location ? { "@type": "Place", name: company.location } : undefined,
+    knowsAbout: company.highlights,
+    additionalProperty: [
+      company.stage ? { "@type": "PropertyValue", name: "Company stage", value: company.stage } : undefined,
+      company.funding ? { "@type": "PropertyValue", name: "Publicly confirmed funding", value: company.funding } : undefined,
+      { "@type": "PropertyValue", name: "Problem being solved", value: company.focus.problem },
+      { "@type": "PropertyValue", name: "Company approach", value: company.focus.approach },
+      company.traction?.length ? { "@type": "PropertyValue", name: "Public traction signals", value: company.traction.join("; ") } : undefined,
+    ].filter(Boolean),
+    subjectOf: company.sources.map((source) => ({ "@type": "WebPage", name: source.label, url: source.url })),
     founder: founderPeople.length ? founderPeople.map((person) => ({ "@type": "Person", name: person.name, jobTitle: person.role, sameAs: [person.linkedin, person.x].filter(Boolean) })) : undefined,
     employee: company.founders.map((person) => ({ "@type": "Person", name: person.name, jobTitle: person.role, sameAs: [person.linkedin, person.x].filter(Boolean) })),
     memberOf: { "@type": "Organization", name: "Proxima Mumbai", url: "https://www.proximamumbai.com" },
@@ -74,8 +97,10 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
     "@type": "ProfilePage",
     "@id": `${canonicalUrl}#webpage`,
     url: canonicalUrl,
-    name: `${company.name}: Company, Team & What It Builds`,
+    name: profileTitle,
     description: company.description,
+    dateModified: "2026-08-05",
+    keywords: company.seoKeywords.join(", "),
     primaryImageOfPage: company.image ? { "@type": "ImageObject", url: company.image } : undefined,
     isPartOf: { "@type": "WebSite", name: "Proxima Mumbai", url: "https://www.proximamumbai.com" },
     mainEntity: { "@id": `${canonicalUrl}#organization` },
@@ -102,14 +127,25 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
         </div>
         <div className="company-profile-sector">{company.sector}</div>
         <h1>{company.name}</h1>
-        <p>{company.description}</p>
-        {company.website && <a className="company-website-link" href={company.website} target="_blank" rel="noreferrer">Visit company <span>↗</span></a>}
+        <div className="company-profile-feature">
+          <div className="company-profile-copy">
+            <p>{company.description}</p>
+            {company.website && <a className="company-website-link" href={company.website} target="_blank" rel="noreferrer">Visit company <span>↗</span></a>}
+          </div>
+          <div className={`company-profile-image${company.image ? "" : " company-profile-image-placeholder"}`}>
+            {company.image
+              ? <Image src={company.image} alt={`${company.name} company visual`} fill sizes="(max-width: 680px) 90vw, 48vw" priority />
+              : <span aria-hidden="true">{company.name.slice(0, 2)}</span>}
+          </div>
+        </div>
         <div className="company-profile-number" aria-hidden="true">{String(companyIndex + 1).padStart(2, "0")}</div>
       </section>
 
       <section className="company-profile-body">
         <div className="company-profile-intro">
-          <div className="section-kicker">About {company.name}</div>
+          <div className="company-profile-intro-rail">
+            <div className="section-kicker">About {company.name}</div>
+          </div>
           <div className="company-profile-overview">
             {company.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>

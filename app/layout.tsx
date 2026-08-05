@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   description: "Proxima Mumbai is a high-trust founder network connecting ambitious Bombay builders to grants of up to ₹10 lakh with 3F.VC, national communities, and direct paths to capital.",
   metadataBase: new URL("https://www.proximamumbai.com"),
   applicationName: "Proxima Mumbai",
+  icons: {
+    icon: [{ url: "/favicon.ico", type: "image/x-icon" }],
+    shortcut: "/favicon.ico",
+  },
   alternates: { canonical: "/" },
   keywords: ["Proxima Mumbai", "Mumbai founder community", "Mumbai startups", "Mumbai tech community", "Indian startup network"],
   robots: { index: true, follow: true },
