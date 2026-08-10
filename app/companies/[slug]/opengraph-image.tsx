@@ -14,7 +14,7 @@ async function loadCompanyImage(url?: string) {
     if (!response.ok) return undefined;
 
     const png = await sharp(Buffer.from(await response.arrayBuffer()))
-      .resize(540, 630, { fit: "cover" })
+      .resize(440, 280, { fit: "inside", withoutEnlargement: true })
       .png()
       .toBuffer();
 
@@ -51,29 +51,26 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ slu
         <div
           style={{
             position: "absolute",
-            top: 0,
-            right: 0,
-            width: 540,
-            height: 630,
+            top: 145,
+            right: 40,
+            width: 460,
+            height: 320,
             display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 10,
             overflow: "hidden",
-            background: "#11110f",
+            background: "#ffffff",
+            border: "1px solid rgba(17,17,15,.18)",
           }}
         >
           {/* ImageResponse requires a native image element for raster assets. */}
           <img
             src={companyImage as unknown as string}
             alt=""
-            width="540"
-            height="630"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(90deg, rgba(244,241,233,.42) 0%, transparent 22%), linear-gradient(0deg, rgba(17,17,15,.25), transparent 45%)",
-            }}
+            width="440"
+            height="280"
+            style={{ width: 440, height: 280, objectFit: "contain" }}
           />
         </div>
       )}

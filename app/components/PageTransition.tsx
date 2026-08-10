@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export default function PageTransition() {
   const pathname = usePathname();
@@ -45,9 +45,12 @@ export default function PageTransition() {
     };
   }, [reduceMotion, router]);
 
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
+
   useEffect(() => {
     if (!inFlight.current) return;
-    window.scrollTo(0, 0);
     const id = window.setTimeout(() => {
       setActive(false);
       inFlight.current = false;
