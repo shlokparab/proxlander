@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CompanyNavigation from "../CompanyNavigation";
+import BrandMark from "../../components/BrandMark";
 import { companies, getCompany } from "../../data/companies";
 import { getSiteUrl, socialImageVersion } from "../../lib/site-url";
 
@@ -199,9 +200,9 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
       </nav>
 
       <footer>
-        <Link className="brand footer-brand" href="/"><span className="brand-shape" /><span>proxima<br />mumbai</span></Link>
+        <Link className="brand footer-brand" href="/" aria-label="Proxima Mumbai home"><BrandMark /></Link>
         <p>Good companies.<br />Hard problems.<br />No theatre.</p>
-        <div><Link href="/companies">Companies</Link><Link href="/#grants">Founder grants</Link><a href="mailto:hello@proxima.mumbai">Email us</a></div>
+        <div><Link href="/companies">Companies</Link><Link href="/#grants">Founder grants</Link><Link href="/brand">Brand assets</Link><a href="mailto:hello@proxima.mumbai">Email us</a></div>
         <small>© 2026 Proxima Mumbai</small>
       </footer>
     </main>

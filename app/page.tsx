@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import BrandMark from "./components/BrandMark";
 
 const founderSignals = ["Y Combinator", "Entrepreneur First", "WTFund", "Antler", "Pebblebed", "Hive Mind Capital", "Emergent Ventures", "Offscript Ventures", "Accel"];
 
@@ -81,8 +82,7 @@ export default function Home() {
       <div className="page-shell">
       <header className="masthead">
         <a className="brand" href="#top" aria-label="Proxima Mumbai home">
-          <span className="brand-shape" />
-          <span>proxima<br />mumbai</span>
+          <BrandMark />
         </a>
         <button className={`menu-button${menuOpen ? " menu-button-open" : ""}`} onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="main-nav">
           {menuOpen ? "Close" : "Navigate"}
@@ -262,9 +262,9 @@ export default function Home() {
       </section>
 
       <footer>
-        <a className="brand footer-brand" href="#top"><span className="brand-shape" /><span>proxima<br />mumbai</span></a>
+        <a className="brand footer-brand" href="#top" aria-label="Proxima Mumbai home"><BrandMark /></a>
         <p>Built in Bombay.<br />Connected across India.<br />Open to builders.</p>
-        <div><Link href="/companies">Companies</Link><a href="#grants">Founder grants</a><a href="mailto:hello@proxima.mumbai">Email us</a></div>
+        <div><Link href="/companies">Companies</Link><a href="#grants">Founder grants</a><Link href="/brand">Brand assets</Link><a href="mailto:hello@proxima.mumbai">Email us</a></div>
         <small>© 2026 Proxima Mumbai</small>
       </footer>
       </div>

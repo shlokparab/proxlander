@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import CompanyNavigation from "./CompanyNavigation";
+import BrandMark from "../components/BrandMark";
 import { companies } from "../data/companies";
 
 export default function CompaniesPage() {
@@ -86,9 +87,9 @@ export default function CompaniesPage() {
       </section>
 
       <footer>
-        <Link className="brand footer-brand" href="/"><span className="brand-shape" /><span>proxima<br />mumbai</span></Link>
+        <Link className="brand footer-brand" href="/" aria-label="Proxima Mumbai home"><BrandMark /></Link>
         <p>Good companies.<br />Hard problems.<br />No theatre.</p>
-        <div><Link href="/">Home</Link><Link href="/#grants">Founder grants</Link><a href="mailto:hello@proxima.mumbai">Email us</a></div>
+        <div><Link href="/">Home</Link><Link href="/#grants">Founder grants</Link><Link href="/brand">Brand assets</Link><a href="mailto:hello@proxima.mumbai">Email us</a></div>
         <small>© 2026 Proxima Mumbai</small>
       </footer>
     </main>

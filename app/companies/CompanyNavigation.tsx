@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
+import BrandMark from "../components/BrandMark";
 
 export default function CompanyNavigation() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,8 +12,7 @@ export default function CompanyNavigation() {
   return (
     <header className="masthead companies-masthead">
       <Link className="brand" href="/" aria-label="Proxima Mumbai home">
-        <span className="brand-shape" />
-        <span>proxima<br />mumbai</span>
+        <BrandMark />
       </Link>
       <button className={`menu-button${menuOpen ? " menu-button-open" : ""}`} onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="companies-nav">
         {menuOpen ? "Close" : "Navigate"}

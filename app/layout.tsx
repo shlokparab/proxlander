@@ -50,7 +50,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         "@id": "https://www.proximamumbai.com/#organization",
         name: "Proxima Mumbai",
         url: "https://www.proximamumbai.com",
-        logo: "https://www.proximamumbai.com/og.png",
+        logo: "https://www.proximamumbai.com/brand/proxima.png",
         description: "A high-trust Mumbai founder network connecting ambitious builders to national communities and early capital.",
         sameAs: ["https://www.linkedin.com/company/proxima-mumbai", "https://x.com/ProximaMumbai", "https://www.youtube.com/@ProximaMumbai"],
         address: { "@type": "PostalAddress", addressLocality: "Mumbai", addressRegion: "Maharashtra", addressCountry: "IN" },
