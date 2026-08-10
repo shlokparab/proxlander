@@ -30,7 +30,7 @@ export default function CompaniesPage() {
       <section className="companies-hero">
         <div className="companies-hero-grain" aria-hidden="true" />
         <motion.div className="companies-eyebrow" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .18 }}>
-          05 / The companies in the room · {companies.length} profiles
+          06 / The companies in the room · {companies.length} profiles
         </motion.div>
         <h1 aria-label="Companies in motion">
           <span className="companies-title-line"><motion.i initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: .8, ease: [0.16, 1, 0.3, 1] }}>Companies,</motion.i></span>

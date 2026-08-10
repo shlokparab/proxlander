@@ -21,6 +21,7 @@ export default function CompanyNavigation() {
         <Link href="/">Home</Link>
         <Link href="/companies">Companies</Link>
         <Link href="/#thesis">Why Proxima</Link>
+        <a href="https://events.proximamumbai.com">Events</a>
         <Link href="/#grants">Grants</Link>
         <Link href="/#network">Network</Link>
         <Link href="/#join">Join</Link>

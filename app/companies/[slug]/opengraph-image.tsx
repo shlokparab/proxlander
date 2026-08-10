@@ -1,15 +1,36 @@
 import { ImageResponse } from "next/og";
+import sharp from "sharp";
 import { getCompany } from "../../data/companies";
 
 export const alt = "A company in the Proxima Mumbai network";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+async function loadCompanyImage(url?: string) {
+  if (!url) return undefined;
+
+  try {
+    const response = await fetch(url, { next: { revalidate: 86400 } });
+    if (!response.ok) return undefined;
+
+    const png = await sharp(Buffer.from(await response.arrayBuffer()))
+      .resize(540, 630, { fit: "cover" })
+      .png()
+      .toBuffer();
+
+    return Uint8Array.from(png).buffer;
+  } catch {
+    return undefined;
+  }
+}
+
 export default async function OpenGraphImage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const company = getCompany(slug);
   const name = company?.name ?? "Proxima Mumbai";
   const sector = company?.sector ?? "Founder network";
+  const companyImage = await loadCompanyImage(company?.image);
+  const nameSize = name.length > 18 ? 52 : name.length > 12 ? 62 : name.length > 9 ? 72 : 84;
 
   return new ImageResponse(
     <div
@@ -19,30 +40,62 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ slu
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        padding: "58px 64px",
+        padding: "52px 58px",
         overflow: "hidden",
         position: "relative",
         background: "#f4f1e9",
         color: "#11110f",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 22, letterSpacing: "0.02em" }}>
+      {companyImage && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            width: 540,
+            height: 630,
+            display: "flex",
+            overflow: "hidden",
+            background: "#11110f",
+          }}
+        >
+          {/* ImageResponse requires a native image element for raster assets. */}
+          <img
+            src={companyImage as unknown as string}
+            alt=""
+            width="540"
+            height="630"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(90deg, rgba(244,241,233,.42) 0%, transparent 22%), linear-gradient(0deg, rgba(17,17,15,.25), transparent 45%)",
+            }}
+          />
+        </div>
+      )}
+
+      <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 20, letterSpacing: "0.02em", zIndex: 2 }}>
         <div style={{ width: 26, height: 26, borderRadius: 999, background: "#8e351f" }} />
         <div style={{ display: "flex" }}>PROXIMA / MUMBAI</div>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", zIndex: 2 }}>
-        <div style={{ display: "flex", color: "#8e351f", fontSize: 22, letterSpacing: "0.12em", textTransform: "uppercase" }}>{sector}</div>
-        <div style={{ display: "flex", maxWidth: 1050, marginTop: 18, fontFamily: "serif", fontSize: name.length > 16 ? 112 : 146, lineHeight: 0.82, letterSpacing: "-0.065em", textTransform: "uppercase" }}>{name}</div>
+      <div style={{ display: "flex", flexDirection: "column", width: companyImage ? 550 : 1050, zIndex: 2 }}>
+        <div style={{ display: "flex", color: "#8e351f", fontSize: 19, letterSpacing: "0.12em", textTransform: "uppercase" }}>{sector}</div>
+        <div style={{ display: "flex", maxWidth: companyImage ? 550 : 1050, marginTop: 18, fontFamily: "serif", fontSize: companyImage ? nameSize : name.length > 16 ? 112 : 146, lineHeight: 0.84, letterSpacing: "-0.06em", textTransform: "uppercase" }}>{name}</div>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", zIndex: 2 }}>
-        <div style={{ display: "flex", fontSize: 24, color: "#5f5d57" }}>Company profile · Builders in motion.</div>
-        <div style={{ display: "flex", fontSize: 18, letterSpacing: "0.08em", textTransform: "uppercase" }}>proximamumbai.com</div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", width: companyImage ? 550 : "100%", zIndex: 2 }}>
+        <div style={{ display: "flex", fontSize: 21, color: "#5f5d57" }}>Company profile · Builders in motion.</div>
+        {!companyImage && <div style={{ display: "flex", fontSize: 18, letterSpacing: "0.08em", textTransform: "uppercase" }}>proximamumbai.com</div>}
       </div>
 
-      <div style={{ position: "absolute", right: -140, bottom: -260, width: 680, height: 680, borderRadius: 999, border: "90px solid rgba(142,53,31,.15)" }} />
-      <div style={{ position: "absolute", right: 110, bottom: -190, width: 430, height: 430, borderRadius: 999, border: "2px solid rgba(142,53,31,.45)" }} />
+      {!companyImage && <div style={{ position: "absolute", right: -140, bottom: -260, width: 680, height: 680, borderRadius: 999, border: "90px solid rgba(142,53,31,.15)" }} />}
+      {!companyImage && <div style={{ position: "absolute", right: 110, bottom: -190, width: 430, height: 430, borderRadius: 999, border: "2px solid rgba(142,53,31,.45)" }} />}
+      {companyImage && <div style={{ position: "absolute", top: 0, bottom: 0, left: 659, width: 1, background: "rgba(17,17,15,.18)", zIndex: 3 }} />}
     </div>,
     size,
   );

@@ -176,7 +176,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
             {company.founders.map((founder, founderIndex) => (
               <article className="company-founder" key={founder.name}>
                 <div className="company-founder-image">
-                  {founder.image ? <Image src={founder.image} alt={`${founder.name}, ${founder.role} at ${company.name}`} fill sizes="(max-width: 700px) 90vw, 42vw" priority={founderIndex < 2} /> : <div className="company-founder-placeholder" aria-hidden="true"><span>{founder.name.split(" ").map((part) => part[0]).join("")}</span><strong>{company.name}</strong></div>}
+                  {founder.image ? <Image src={founder.image} alt={`${founder.name}, ${founder.role} at ${company.name}`} fill sizes="(max-width: 680px) 84px, 148px" priority={founderIndex < 2} /> : <div className="company-founder-placeholder" aria-hidden="true"><span>{founder.name.split(" ").map((part) => part[0]).join("")}</span><strong>{company.name}</strong></div>}
                 </div>
                 <div className="company-founder-copy">
                   <span>{founder.role}</span>
