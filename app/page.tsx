@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { preload } from "react-dom";
 import BrandMark from "./components/BrandMark";
 
 const founderSignals = ["Y Combinator", "Entrepreneur First", "WTFund", "Antler", "Pebblebed", "Hive Mind Capital", "Emergent Ventures", "Offscript Ventures", "Accel"];
@@ -16,10 +17,9 @@ const domains = [
 ];
 
 const reveal: Variants = {
-  hidden: { y: "28%", opacity: 0 },
+  hidden: { y: "28%" },
   show: (i: number) => ({
     y: 0,
-    opacity: 1,
     transition: { delay: 0.06 + i * 0.06, duration: 0.65, ease: [0.16, 1, 0.3, 1] },
   }),
 };
@@ -41,6 +41,8 @@ function SocialIcon({ name }: { name: "x" | "linkedin" | "youtube" }) {
 }
 
 export default function Home() {
+  preload("/images/monsoon-wave-v2.png", { as: "image", fetchPriority: "high" });
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const reduceMotion = useReducedMotion();
@@ -138,13 +140,13 @@ export default function Home() {
           <span className="mask word-founders"><motion.i custom={1} variants={reveal} initial="hidden" animate={loaded ? "show" : "hidden"}>Mumbai</motion.i></span>
         </h1>
 
-        <motion.p className="hero-tagline" initial={{ opacity: 0, y: 12 }} animate={loaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }} transition={{ delay: 0.52, duration: 0.5 }}>
+        <motion.p className="hero-tagline" initial={{ y: 12 }} animate={loaded ? { y: 0 } : { y: 12 }} transition={{ delay: 0.52, duration: 0.5 }}>
           A founder community for people already in motion.
         </motion.p>
 
         <a className="hero-cta magnetic" href="#join"><span>Enter the room</span></a>
 
-        <motion.div className="hero-under-cta" initial={{ opacity: 0, y: 10 }} animate={loaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={{ delay: .68, duration: .45 }}>
+        <motion.div className="hero-under-cta" initial={{ y: 10 }} animate={loaded ? { y: 0 } : { y: 10 }} transition={{ delay: .68, duration: .45 }}>
           <nav className="hero-socials" aria-label="Proxima Mumbai social profiles">
             <a href="https://x.com/ProximaMumbai" target="_blank" rel="noreferrer" aria-label="Proxima Mumbai on X"><SocialIcon name="x" /></a>
             <a href="https://www.linkedin.com/company/proxima-mumbai" target="_blank" rel="noreferrer" aria-label="Proxima Mumbai on LinkedIn"><SocialIcon name="linkedin" /></a>
@@ -157,7 +159,7 @@ export default function Home() {
       <section className="home-thesis" id="thesis" aria-labelledby="thesis-title">
         <div className="section-kicker">01 / The Proxima advantage</div>
         <div className="home-thesis-grid">
-          <motion.h2 id="thesis-title" initial={{ opacity: 0.2, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }}>
+          <motion.h2 id="thesis-title" initial={{ y: 24 }} whileInView={{ y: 0 }} viewport={{ once: true, amount: 0.35 }}>
             Bring the idea.<br />Bring the resolve<br /><em>to ship.</em>
           </motion.h2>
           <div className="home-thesis-copy">
@@ -177,7 +179,7 @@ export default function Home() {
         <div className="home-events-orbit" aria-hidden="true" />
         <div className="section-kicker">02 / Proxima events</div>
         <div className="home-events-heading">
-          <motion.h2 id="events-title" initial={{ opacity: 0.2, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }}>
+          <motion.h2 id="events-title" initial={{ y: 24 }} whileInView={{ y: 0 }} viewport={{ once: true, amount: 0.3 }}>
             Rooms worth<br /><em>showing up for.</em>
           </motion.h2>
           <div className="home-events-copy">
@@ -206,7 +208,7 @@ export default function Home() {
             <a href="mailto:hello@proxima.mumbai?subject=Proxima%20x%203F.VC%20founder%20grant">Ask about the grant <Arrow /></a>
           </div>
         </div>
-        <div className="home-grants-mark">₹10L</div>
+        <div className="home-grants-mark" aria-hidden="true">₹10L</div>
       </section>
 
       <section className="home-network" id="network" aria-labelledby="network-title">

@@ -1,16 +1,18 @@
 import type { MetadataRoute } from "next";
 import { companies } from "./data/companies";
+import { getSiteUrl } from "./lib/site-url";
 
-const BASE_URL = "https://www.proximamumbai.com";
-const LAST_UPDATED = new Date("2026-07-29T00:00:00.000Z");
+const LAST_UPDATED = new Date("2026-08-10T00:00:00.000Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const siteUrl = getSiteUrl();
+
   return [
-    { url: BASE_URL, lastModified: LAST_UPDATED, changeFrequency: "weekly", priority: 1 },
-    { url: `${BASE_URL}/companies`, lastModified: LAST_UPDATED, changeFrequency: "weekly", priority: .95 },
-    { url: `${BASE_URL}/brand`, lastModified: LAST_UPDATED, changeFrequency: "monthly", priority: .65 },
+    { url: siteUrl, lastModified: LAST_UPDATED, changeFrequency: "weekly", priority: 1 },
+    { url: `${siteUrl}/companies`, lastModified: LAST_UPDATED, changeFrequency: "weekly", priority: .95 },
+    { url: `${siteUrl}/brand`, lastModified: LAST_UPDATED, changeFrequency: "monthly", priority: .65 },
     ...companies.map((company) => ({
-      url: `${BASE_URL}/companies/${company.slug}`,
+      url: `${siteUrl}/companies/${company.slug}`,
       lastModified: LAST_UPDATED,
       changeFrequency: "monthly" as const,
       priority: .8,
