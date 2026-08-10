@@ -11,4 +11,4 @@ export function getSiteUrl() {
   return normalizeUrl(configuredUrl || publicVercelUrl || fallbackSiteUrl).replace(/\/$/, "");
 }
 
-export const socialImageVersion = "20260810-1";
+export const socialImageVersion = "20260810-2";

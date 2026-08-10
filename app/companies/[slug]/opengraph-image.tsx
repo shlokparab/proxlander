@@ -1,10 +1,18 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import sharp from "sharp";
 import { getCompany } from "../../data/companies";
 
 export const alt = "A company in the Proxima Mumbai network";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+async function loadBrandMark() {
+  const source = await readFile(join(process.cwd(), "public/brand/proxima-black.png"));
+  const png = await sharp(source).resize(30, 30, { fit: "contain" }).png().toBuffer();
+  return Uint8Array.from(png).buffer;
+}
 
 async function loadCompanyImage(url?: string) {
   if (!url) return undefined;
@@ -29,6 +37,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ slu
   const company = getCompany(slug);
   const name = company?.name ?? "Proxima Mumbai";
   const sector = company?.sector ?? "Founder network";
+  const brandMark = await loadBrandMark();
   const companyImage = await loadCompanyImage(company?.image);
   const nameSize = name.length > 18 ? 52 : name.length > 12 ? 62 : name.length > 9 ? 72 : 84;
 
@@ -76,7 +85,8 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ slu
       )}
 
       <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 20, letterSpacing: "0.02em", zIndex: 2 }}>
-        <div style={{ width: 26, height: 26, borderRadius: 999, background: "#8e351f" }} />
+        {/* ImageResponse requires a native image element for raster assets. */}
+        <img src={brandMark as unknown as string} alt="" width="30" height="30" style={{ width: 30, height: 30, objectFit: "contain" }} />
         <div style={{ display: "flex" }}>PROXIMA / MUMBAI</div>
       </div>
 
