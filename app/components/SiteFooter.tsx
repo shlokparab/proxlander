@@ -43,7 +43,7 @@ export default function SiteFooter() {
         </nav>
         <div className="site-footer-contact">
           <span>Start a conversation</span>
-          <a href="mailto:hello@proxima.mumbai">hello@proxima.mumbai</a>
+          <a href="mailto:hi@proximamumbai.com">hi@proximamumbai.com</a>
         </div>
       </div>
 
@@ -53,8 +53,8 @@ export default function SiteFooter() {
 
       <div className="site-footer-bottomline">
         <small>© 2026 Proxima Mumbai</small>
-        <small>19.0760° N / 72.8777° E</small>
-        <a href="#top">Back to top ↑</a>
+       
+       
       </div>
     </footer>
   );

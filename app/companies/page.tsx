@@ -89,7 +89,7 @@ export default function CompaniesPage() {
         <div className="section-kicker">The directory keeps moving</div>
         <h2>Building something<br /><em>worth knowing?</em></h2>
         <p>Proxima is for companies already in motion. Tell us what your team is making true.</p>
-        <a href="mailto:hello@proxima.mumbai?subject=Company%20for%20Proxima" className="join-link">Put your company on our radar</a>
+        <a href="mailto:hi@proximamumbai.com?subject=Company%20for%20Proxima" className="join-link">Put your company on our radar</a>
       </section>
 
       <SiteFooter />
