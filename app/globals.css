@@ -62,7 +62,7 @@ button { color: inherit; font: inherit; }
 
 .hero { position: relative; height: 100svh; min-height: 760px; overflow: hidden; isolation: isolate; background: var(--paper); }
 .hero-current { position: absolute; z-index: 2; inset: 0 -2vw 0 -2vw; width: 104vw; height: 100%; overflow: visible; background: var(--ink); pointer-events: none; will-change: transform, opacity; }
-.hero-media { position: absolute; left: 2%; top: 28.889%; width: 106%; height: 106%; display: block; background: url('/images/monsoon-wave-v2.png') right top / cover no-repeat; color: transparent; object-fit: cover; object-position: right top; }
+.hero-media { position: absolute; left: 2%; top: 28.889%; width: 106%; height: 106%; background-position: right top; background-repeat: no-repeat; background-size: cover; }
 .current-image { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .hero-title { margin: 0; font-family: Georgia, "Times New Roman", serif; font-weight: 400; letter-spacing: -.075em; line-height: .82; text-transform: uppercase; }
 .mask { position: absolute; z-index: 6; display: block; overflow: hidden; white-space: nowrap; }

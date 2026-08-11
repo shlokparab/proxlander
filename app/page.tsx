@@ -132,16 +132,12 @@ export default function Home() {
           animate={loaded ? { opacity: 1, scale: 1 } : undefined}
           transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Keep this as a native img so the browser fetches Cloudflare directly.
-              Next's image optimizer and SVG image embedding both add stricter TLS/CORS requirements. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          {/* CSS backgrounds let the browser fetch Cloudflare directly without
+              exposing a broken-image border if certificate validation fails. */}
+          <div
             className="hero-media"
-            src={HERO_IMAGE_URL}
-            alt=""
             aria-hidden="true"
-            decoding="sync"
-            fetchPriority="high"
+            style={{ backgroundImage: `url("${HERO_IMAGE_URL}"), url("${HERO_FALLBACK_URL}")` }}
           />
           <svg className="current-image" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
             <defs>
