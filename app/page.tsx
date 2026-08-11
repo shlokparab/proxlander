@@ -5,8 +5,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { preload } from "react-dom";
 import BrandMark from "./components/BrandMark";
+import SiteFooter from "./components/SiteFooter";
 
-const founderSignals = ["Y Combinator", "Entrepreneur First", "WTFund", "Antler", "Pebblebed", "Hive Mind Capital", "Emergent Ventures", "Offscript Ventures", "Accel"];
+const founderSignals = ["Y Combinator", "Entrepreneurs First", "WTFund", "Antler", "Pebblebed", "Hive Mind Capital", "Emergent Ventures", "Offscript Ventures", "Accel"];
+
+const GRANT_EMAIL_URL = "https://mail.google.com/mail/?view=cm&fs=1&to=hello%40proxima.mumbai&su=Proxima%20x%203F.VC%20founder%20grant";
 
 const domains = [
   { index: "01", name: "Deep tech", note: "Science that leaves the lab" },
@@ -41,7 +44,7 @@ function SocialIcon({ name }: { name: "x" | "linkedin" | "youtube" }) {
 }
 
 export default function Home() {
-  preload("/images/monsoon-wave-v2.png", { as: "image", fetchPriority: "high" });
+  preload("https://media.proximamumbai.com/logos/02-marine-drive.webp", { as: "image", fetchPriority: "high" });
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -130,7 +133,7 @@ export default function Home() {
               </linearGradient>
             </defs>
             <rect width="1600" height="900" fill="#11110f" clipPath="url(#hero-wave-clip)" />
-            <image href="/images/monsoon-wave-v2.png" x="32" y="260" width="1696" height="954" preserveAspectRatio="xMaxYMin slice" clipPath="url(#hero-wave-clip)" />
+            <image href="https://media.proximamumbai.com/logos/02-marine-drive.webp" x="32" y="260" width="1696" height="954" preserveAspectRatio="xMaxYMin slice" clipPath="url(#hero-wave-clip)" />
             <rect width="1600" height="900" fill="url(#hero-wave-shade)" clipPath="url(#hero-wave-clip)" />
           </svg>
         </motion.div>
@@ -144,7 +147,14 @@ export default function Home() {
           A founder community for people already in motion.
         </motion.p>
 
-        <a className="hero-cta magnetic" href="#join"><span>Enter the room</span></a>
+        <a
+          className="hero-cta magnetic"
+          href="https://airtable.com/appZuFxRHE6j4u3nz/shrer90nVgB5dUbVH"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>Apply to Proxima Mumbai</span>
+        </a>
 
         <motion.div className="hero-under-cta" initial={{ y: 10 }} animate={loaded ? { y: 0 } : { y: 10 }} transition={{ delay: .68, duration: .45 }}>
           <nav className="hero-socials" aria-label="Proxima Mumbai social profiles">
@@ -205,7 +215,7 @@ export default function Home() {
           <div className="home-grants-note">
             <strong>Founder grants for Mumbai</strong>
             <p>We’re working with 3F.VC to back talented Mumbai founders with grants of up to ₹10 lakh. Conviction should not have to wait for permission—or a move to another city.</p>
-            <a href="mailto:hello@proxima.mumbai?subject=Proxima%20x%203F.VC%20founder%20grant">Ask about the grant <Arrow /></a>
+            <a href={GRANT_EMAIL_URL} target="_blank" rel="noreferrer">Ask about the grant <Arrow /></a>
           </div>
         </div>
         <div className="home-grants-mark" aria-hidden="true">₹10L</div>
@@ -229,7 +239,7 @@ export default function Home() {
         <div className="section-kicker">05 / Track record in the room</div>
         <div className="home-talent-heading">
           <h2 id="talent-title">Selected by YC.<br /><em>Backed by Accel.</em></h2>
-          <p>People across the Proxima network have been selected by Y Combinator and backed by funds and programs including Entrepreneur First, WTFund, Antler, Pebblebed, Hive Mind Capital, Emergent Ventures, Offscript Ventures, and Accel.</p>
+          <p>People across the Proxima network have been selected by Y Combinator and backed by funds and programs including Entrepreneurs First, WTFund, Antler, Pebblebed, Hive Mind Capital, Emergent Ventures, Offscript Ventures, and Accel.</p>
         </div>
         <div className="home-signal-list" aria-label="Funds and programs represented in the Proxima network">
           {founderSignals.map((signal, index) => <span key={signal}><i>{String(index + 1).padStart(2, "0")}</i>{signal}</span>)}
@@ -263,12 +273,7 @@ export default function Home() {
         <div className="join-meta">Mumbai, India · Founder-led · In person<br />Ideas / collaborators / grants / community</div>
       </section>
 
-      <footer>
-        <a className="brand footer-brand" href="#top" aria-label="Proxima Mumbai home"><BrandMark /></a>
-        <p>Built in Bombay.<br />Connected across India.<br />Open to builders.</p>
-        <div><Link href="/companies">Companies</Link><a href="#grants">Founder grants</a><Link href="/brand">Brand assets</Link><a href="mailto:hello@proxima.mumbai">Email us</a></div>
-        <small>© 2026 Proxima Mumbai</small>
-      </footer>
+      <SiteFooter />
       </div>
     </main>
   );
