@@ -251,18 +251,20 @@ export default function Home() {
         <div className="section-kicker">05 / Track record in the room</div>
         <div className="home-talent-heading">
           <h2 id="talent-title">Members chosen<br /><em>from amongst the best.</em></h2>
-          <p>People across the Proxima network have been selected by Y Combinator and backed by funds and programs including Entrepreneurs First, WTFund, Antler, Pebblebed, Hive Mind Capital, Emergent Ventures, Offscript Ventures, and Accel.</p>
+          <div className="home-talent-copy">
+            <p>People across the Proxima network have been selected by Y Combinator and backed by funds and programs including Entrepreneurs First, WTFund, Antler, Pebblebed, Hive Mind Capital, Emergent Ventures, Offscript Ventures, and Accel.</p>
+          </div>
         </div>
         <div className="home-signal-list" aria-label="Funds and programs represented in the Proxima network">
           {founderSignals.map((signal, index) => <span key={signal}><i>{String(index + 1).padStart(2, "0")}</i>{signal}</span>)}
         </div>
+        <Link className="home-companies-link" href="/companies">Explore the companies being built</Link>
         <div className="home-domains">
           <div className="home-domains-image" role="img" aria-label="Robotics, biotechnology, consumer products, and media tools on a maker's bench" />
           <div className="home-domains-copy">
             <div className="section-kicker">What they’re building</div>
             <h3>Deep tech.<br /><em>AI. Hardware.</em><br />Media. Consumer.</h3>
             <p>The companies in Proxima span deep tech, AI, hardware, consumer brands, and media. Open the directory and see what is being built.</p>
-            <Link className="home-companies-link" href="/companies">Explore the companies being built</Link>
             <div className="home-domain-list">
               {domains.map((domain) => <div key={domain.name}><span>{domain.index}</span><strong>{domain.name}</strong><small>{domain.note}</small></div>)}
             </div>
