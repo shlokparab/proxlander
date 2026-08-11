@@ -10,7 +10,7 @@ import SiteFooter from "./components/SiteFooter";
 const founderSignals = ["Y Combinator", "Entrepreneurs First", "WTFund", "Antler", "Pebblebed", "Hive Mind Capital", "Emergent Ventures", "Offscript Ventures", "Accel"];
 
 const GRANT_EMAIL_URL = "https://mail.google.com/mail/?view=cm&fs=1&to=hello%40proxima.mumbai&su=Proxima%20x%203F.VC%20founder%20grant";
-const HERO_IMAGE_URL = "https://media.proximamumbai.com/logos/02-marine-drive.webp";
+const HERO_IMAGE_URL = "https://media.proximamumbai.com/logos/marines.webp";
 const HERO_FALLBACK_URL = "/images/monsoon-wave-v2.png";
 const HOMEPAGE_IMAGE_URLS = [
   "/images/proxima-grants-workshop-v3.webp",

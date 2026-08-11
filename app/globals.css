@@ -512,7 +512,7 @@ h2 em { color: inherit; font-weight: 400; }
 
 @media (max-width: 680px) {
   .hero { height: max(100svh, 860px); min-height: 860px; }
-  .hero-current { inset: auto 0 0; width: 100%; height: 380px; overflow: hidden; border-radius: 58% 0 0 0 / 15% 0 0 0; background: linear-gradient(180deg, rgba(17,17,15,.12), rgba(17,17,15,.52)), url('https://media.proximamumbai.com/logos/02-marine-drive.webp') 58% center / cover no-repeat, url('/images/monsoon-wave-v2.png') 58% center / cover no-repeat; }
+  .hero-current { inset: auto 0 0; width: 100%; height: 380px; overflow: hidden; border-radius: 58% 0 0 0 / 15% 0 0 0; background: linear-gradient(180deg, rgba(17,17,15,.12), rgba(17,17,15,.52)), url('https://media.proximamumbai.com/logos/marines.webp') 58% center / cover no-repeat, url('/images/monsoon-wave-v2.png') 58% center / cover no-repeat; }
   .hero-current::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(17,17,15,.34)); }
   .current-image { display: none; }
   .word-where { top: 92px; left: 4vw; font-size: clamp(3.5rem, 14vw, 5.2rem); }
