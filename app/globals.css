@@ -61,7 +61,8 @@ button { color: inherit; font: inherit; }
 .site-nav a:hover { padding-right: 18px; border-color: rgba(255,255,255,.52); color: #fff; }
 
 .hero { position: relative; height: 100svh; min-height: 760px; overflow: hidden; isolation: isolate; background: var(--paper); }
-.hero-current { position: absolute; z-index: 2; inset: 0 -2vw 0 -2vw; width: 104vw; height: 100%; overflow: visible; pointer-events: none; will-change: transform, opacity; }
+.hero-current { position: absolute; z-index: 2; inset: 0 -2vw 0 -2vw; width: 104vw; height: 100%; overflow: visible; background: var(--ink); pointer-events: none; will-change: transform, opacity; }
+.hero-media { position: absolute; left: 2%; top: 28.889%; width: 106%; height: 106%; display: block; background: url('/images/monsoon-wave-v2.png') right top / cover no-repeat; color: transparent; object-fit: cover; object-position: right top; }
 .current-image { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .hero-title { margin: 0; font-family: Georgia, "Times New Roman", serif; font-weight: 400; letter-spacing: -.075em; line-height: .82; text-transform: uppercase; }
 .mask { position: absolute; z-index: 6; display: block; overflow: hidden; white-space: nowrap; }
@@ -514,7 +515,7 @@ h2 em { color: inherit; font-weight: 400; }
   .hero { height: max(100svh, 860px); min-height: 860px; }
   .hero-current { inset: auto 0 0; width: 100%; height: 380px; overflow: hidden; border-radius: 58% 0 0 0 / 15% 0 0 0; background: linear-gradient(180deg, rgba(17,17,15,.12), rgba(17,17,15,.52)), url('https://media.proximamumbai.com/logos/marines.webp') 58% center / cover no-repeat, url('/images/monsoon-wave-v2.png') 58% center / cover no-repeat; }
   .hero-current::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(17,17,15,.34)); }
-  .current-image { display: none; }
+  .current-image, .hero-media { display: none; }
   .word-where { top: 92px; left: 4vw; font-size: clamp(3.5rem, 14vw, 5.2rem); }
   .word-founders { top: clamp(158px, 27vw, 175px); left: 4vw; font-size: clamp(3.25rem, 13.5vw, 5rem); }
   .hero-tagline { top: clamp(230px, 40vw, 275px); left: 4vw; width: min(420px, 82vw); font-size: 1rem; }

@@ -132,6 +132,17 @@ export default function Home() {
           animate={loaded ? { opacity: 1, scale: 1 } : undefined}
           transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
+          {/* Keep this as a native img so the browser fetches Cloudflare directly.
+              Next's image optimizer and SVG image embedding both add stricter TLS/CORS requirements. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="hero-media"
+            src={HERO_IMAGE_URL}
+            alt=""
+            aria-hidden="true"
+            decoding="sync"
+            fetchPriority="high"
+          />
           <svg className="current-image" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" focusable="false">
             <defs>
               <clipPath id="hero-wave-clip" clipPathUnits="userSpaceOnUse">
@@ -142,10 +153,8 @@ export default function Home() {
                 <stop offset="1" stopColor="#11110f" stopOpacity=".28" />
               </linearGradient>
             </defs>
-            <rect width="1600" height="900" fill="#11110f" clipPath="url(#hero-wave-clip)" />
-            <image href={HERO_FALLBACK_URL} x="32" y="260" width="1696" height="954" preserveAspectRatio="xMaxYMin slice" clipPath="url(#hero-wave-clip)" />
-            <image href={HERO_IMAGE_URL} x="32" y="260" width="1696" height="954" preserveAspectRatio="xMaxYMin slice" clipPath="url(#hero-wave-clip)" />
             <rect width="1600" height="900" fill="url(#hero-wave-shade)" clipPath="url(#hero-wave-clip)" />
+            <path d="M -80 765 C 145 780 350 720 545 625 C 690 555 770 420 880 330 C 950 272 1005 290 1065 235 C 1170 140 1235 72 1320 20 C 1430 -45 1540 -80 1680 -100 L -80 -100 Z" fill="#f4f1e9" />
           </svg>
         </motion.div>
 
