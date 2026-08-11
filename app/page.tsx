@@ -115,7 +115,7 @@ export default function Home() {
           aria-hidden={!menuOpen}
           style={{ pointerEvents: menuOpen ? "auto" : "none" }}
         >
-          <a href="#thesis" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Why Proxima</a>
+          <a href="#thesis" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>About</a>
           <a href="https://events.proximamumbai.com" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Events</a>
           <a href="#grants" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Grants</a>
           <a href="#network" tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>Network</a>

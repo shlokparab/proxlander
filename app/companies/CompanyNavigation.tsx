@@ -20,7 +20,7 @@ export default function CompanyNavigation() {
       <motion.nav id="companies-nav" className={`site-nav${menuOpen ? " site-nav-open" : ""}`} animate={{ opacity: menuOpen ? 1 : 0 }} transition={{ duration: reduceMotion ? 0 : .24 }} initial={false} aria-hidden={!menuOpen} style={{ pointerEvents: menuOpen ? "auto" : "none" }}>
         <Link href="/">Home</Link>
         <Link href="/companies">Companies</Link>
-        <Link href="/#thesis">Why Proxima</Link>
+        <Link href="/#thesis">About</Link>
         <a href="https://events.proximamumbai.com">Events</a>
         <Link href="/#grants">Grants</Link>
         <Link href="/#network">Network</Link>
