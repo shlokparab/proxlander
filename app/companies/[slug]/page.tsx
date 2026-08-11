@@ -130,7 +130,7 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
         <div className="company-profile-feature">
           <div className="company-profile-copy">
             <p>{company.description}</p>
-            {company.website && <a className="company-website-link" href={company.website} target="_blank" rel="noreferrer">Visit company <span>↗</span></a>}
+            {company.website && <a className="company-website-link" href={company.website} target="_blank" rel="noreferrer">Visit company</a>}
           </div>
           <div className={`company-profile-image${company.image ? "" : " company-profile-image-placeholder"}`}>
             {company.image
@@ -197,8 +197,8 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
                   <span>{founder.role}</span>
                   <h2>{founder.name}</h2>
                   <div>
-                    {founder.linkedin && <a href={founder.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>}
-                    {founder.x && <a href={founder.x} target="_blank" rel="noreferrer">X ↗</a>}
+                    {founder.linkedin && <a href={founder.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>}
+                    {founder.x && <a href={founder.x} target="_blank" rel="noreferrer">X</a>}
                   </div>
                 </div>
               </article>

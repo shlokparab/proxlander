@@ -77,7 +77,6 @@ export default function CompaniesPage() {
                 <p>{company.description}</p>
                 <div className="company-card-foot">
                   <span>{company.founders.length ? company.founders.map((founder) => founder.name).join(" · ") : "Proxima company"}</span>
-                  <b aria-hidden="true">↗</b>
                 </div>
               </Link>
             </motion.article>

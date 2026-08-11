@@ -35,10 +35,6 @@ const reveal: Variants = {
   }),
 };
 
-function Arrow() {
-  return <span aria-hidden="true">↗</span>;
-}
-
 function SocialIcon({ name }: { name: "x" | "linkedin" | "youtube" }) {
   if (name === "x") {
     return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22H17l-4.9-6.4L6.5 22H3.4l7.2-8.3L2.8 2h6.4l4.4 5.8L18.9 2Zm-1.1 17.9h1.7L8.3 4H6.5l11.3 15.9Z" /></svg>;
@@ -211,7 +207,7 @@ export default function Home() {
           <div className="home-events-copy">
             <p>We host small, high-signal gatherings across Mumbai for founders, engineers, researchers, and operators who would rather compare notes than trade pitches.</p>
             <a className="home-events-cta" href="https://events.proximamumbai.com">
-              <span>See all events</span><Arrow />
+              <span>See all events</span>
             </a>
           </div>
         </div>
@@ -231,7 +227,7 @@ export default function Home() {
           <div className="home-grants-note">
             <strong>Founder grants for Mumbai</strong>
             <p>We’re working with 3F.VC to back talented Mumbai founders with grants of up to ₹10 lakh. Conviction should not have to wait for permission—or a move to another city.</p>
-            <a href={GRANT_EMAIL_URL} target="_blank" rel="noreferrer">Ask about the grant <Arrow /></a>
+            <a href={GRANT_EMAIL_URL} target="_blank" rel="noreferrer">Ask about the grant</a>
           </div>
         </div>
         <div className="home-grants-mark" aria-hidden="true">₹10L</div>
@@ -254,7 +250,7 @@ export default function Home() {
       <section className="home-talent section-dark" id="talent" aria-labelledby="talent-title">
         <div className="section-kicker">05 / Track record in the room</div>
         <div className="home-talent-heading">
-          <h2 id="talent-title">Selected by YC.<br /><em>Backed by Accel.</em></h2>
+          <h2 id="talent-title">Members chosen<br /><em>from amongst the best.</em></h2>
           <p>People across the Proxima network have been selected by Y Combinator and backed by funds and programs including Entrepreneurs First, WTFund, Antler, Pebblebed, Hive Mind Capital, Emergent Ventures, Offscript Ventures, and Accel.</p>
         </div>
         <div className="home-signal-list" aria-label="Funds and programs represented in the Proxima network">
@@ -266,6 +262,7 @@ export default function Home() {
             <div className="section-kicker">What they’re building</div>
             <h3>Deep tech.<br /><em>AI. Hardware.</em><br />Media. Consumer.</h3>
             <p>The companies in Proxima span deep tech, AI, hardware, consumer brands, and media. Open the directory and see what is being built.</p>
+            <Link className="home-companies-link" href="/companies">Explore the companies being built</Link>
             <div className="home-domain-list">
               {domains.map((domain) => <div key={domain.name}><span>{domain.index}</span><strong>{domain.name}</strong><small>{domain.note}</small></div>)}
             </div>
