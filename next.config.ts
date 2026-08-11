@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: "media.proximamumbai.com",
         pathname: "/comps/**",
       },
+      {
+        protocol: "https",
+        hostname: "media.proximamumbai.com",
+        pathname: "/logos/**",
+      },
     ],
   },
 };

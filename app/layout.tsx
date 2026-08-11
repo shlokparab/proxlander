@@ -67,6 +67,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
   return (
     <html lang="en" data-scroll-behavior="smooth">
+      <head>
+        <link rel="dns-prefetch" href="https://media.proximamumbai.com" />
+        <link rel="preconnect" href="https://media.proximamumbai.com" crossOrigin="anonymous" />
+      </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
         <PageTransition />

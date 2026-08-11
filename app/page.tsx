@@ -10,6 +10,14 @@ import SiteFooter from "./components/SiteFooter";
 const founderSignals = ["Y Combinator", "Entrepreneurs First", "WTFund", "Antler", "Pebblebed", "Hive Mind Capital", "Emergent Ventures", "Offscript Ventures", "Accel"];
 
 const GRANT_EMAIL_URL = "https://mail.google.com/mail/?view=cm&fs=1&to=hello%40proxima.mumbai&su=Proxima%20x%203F.VC%20founder%20grant";
+const HERO_IMAGE_URL = "https://media.proximamumbai.com/logos/02-marine-drive.webp";
+const HERO_FALLBACK_URL = "/images/monsoon-wave-v2.png";
+const HOMEPAGE_IMAGE_URLS = [
+  "/images/proxima-grants-workshop-v3.webp",
+  "/images/mumbai-waterfront.webp",
+  "/images/proxima-builder-bench.webp",
+  "/brand/proxima.png",
+];
 
 const domains = [
   { index: "01", name: "Deep tech", note: "Science that leaves the lab" },
@@ -44,7 +52,9 @@ function SocialIcon({ name }: { name: "x" | "linkedin" | "youtube" }) {
 }
 
 export default function Home() {
-  preload("https://media.proximamumbai.com/logos/02-marine-drive.webp", { as: "image", fetchPriority: "high" });
+  preload(HERO_IMAGE_URL, { as: "image", fetchPriority: "high", type: "image/webp" });
+  preload(HERO_FALLBACK_URL, { as: "image", fetchPriority: "high", type: "image/png" });
+  HOMEPAGE_IMAGE_URLS.forEach((src) => preload(src, { as: "image", fetchPriority: "low" }));
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -87,7 +97,7 @@ export default function Home() {
       <div className="page-shell">
       <header className="masthead">
         <a className="brand" href="#top" aria-label="Proxima Mumbai home">
-          <BrandMark />
+          <BrandMark priority />
         </a>
         <button className={`menu-button${menuOpen ? " menu-button-open" : ""}`} onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="main-nav">
           {menuOpen ? "Close" : "Navigate"}
@@ -133,7 +143,8 @@ export default function Home() {
               </linearGradient>
             </defs>
             <rect width="1600" height="900" fill="#11110f" clipPath="url(#hero-wave-clip)" />
-            <image href="https://media.proximamumbai.com/logos/02-marine-drive.webp" x="32" y="260" width="1696" height="954" preserveAspectRatio="xMaxYMin slice" clipPath="url(#hero-wave-clip)" />
+            <image href={HERO_FALLBACK_URL} x="32" y="260" width="1696" height="954" preserveAspectRatio="xMaxYMin slice" clipPath="url(#hero-wave-clip)" />
+            <image href={HERO_IMAGE_URL} x="32" y="260" width="1696" height="954" preserveAspectRatio="xMaxYMin slice" clipPath="url(#hero-wave-clip)" />
             <rect width="1600" height="900" fill="url(#hero-wave-shade)" clipPath="url(#hero-wave-clip)" />
           </svg>
         </motion.div>

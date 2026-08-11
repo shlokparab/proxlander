@@ -12,7 +12,7 @@ export default function CompanyNavigation() {
   return (
     <header className="masthead companies-masthead">
       <Link className="brand" href="/" aria-label="Proxima Mumbai home">
-        <BrandMark />
+        <BrandMark priority />
       </Link>
       <button className={`menu-button${menuOpen ? " menu-button-open" : ""}`} onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="companies-nav">
         {menuOpen ? "Close" : "Navigate"}

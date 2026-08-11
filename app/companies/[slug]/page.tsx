@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CompanyNavigation from "../CompanyNavigation";
 import SiteFooter from "../../components/SiteFooter";
+import ResilientImage from "../../components/ResilientImage";
 import { companies, getCompany } from "../../data/companies";
 import { getSiteUrl, socialImageVersion } from "../../lib/site-url";
 
@@ -134,7 +134,14 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
           </div>
           <div className={`company-profile-image${company.image ? "" : " company-profile-image-placeholder"}`}>
             {company.image
-              ? <Image src={company.image} alt={`${company.name} company visual`} fill sizes="(max-width: 680px) 90vw, 48vw" priority />
+              ? <ResilientImage
+                  src={company.image}
+                  alt={`${company.name} company visual`}
+                  fill
+                  sizes="(max-width: 680px) 90vw, 48vw"
+                  priority
+                  fallback={<span className="company-profile-image-fallback" aria-hidden="true">{company.name.slice(0, 2)}</span>}
+                />
               : <span aria-hidden="true">{company.name.slice(0, 2)}</span>}
           </div>
         </div>
@@ -177,7 +184,14 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
             {company.founders.map((founder, founderIndex) => (
               <article className="company-founder" key={founder.name}>
                 <div className="company-founder-image">
-                  {founder.image ? <Image src={founder.image} alt={`${founder.name}, ${founder.role} at ${company.name}`} fill sizes="(max-width: 680px) 84px, 148px" priority={founderIndex < 2} /> : <div className="company-founder-placeholder" aria-hidden="true"><span>{founder.name.split(" ").map((part) => part[0]).join("")}</span><strong>{company.name}</strong></div>}
+                  {founder.image ? <ResilientImage
+                    src={founder.image}
+                    alt={`${founder.name}, ${founder.role} at ${company.name}`}
+                    fill
+                    sizes="(max-width: 680px) 84px, 148px"
+                    priority={founderIndex < 2}
+                    fallback={<div className="company-founder-placeholder" aria-hidden="true"><span>{founder.name.split(" ").map((part) => part[0]).join("")}</span><strong>{company.name}</strong></div>}
+                  /> : <div className="company-founder-placeholder" aria-hidden="true"><span>{founder.name.split(" ").map((part) => part[0]).join("")}</span><strong>{company.name}</strong></div>}
                 </div>
                 <div className="company-founder-copy">
                   <span>{founder.role}</span>

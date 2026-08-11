@@ -17,7 +17,7 @@ a { color: inherit; text-decoration: none; }
 button { color: inherit; font: inherit; }
 ::selection { background: var(--copper); color: var(--paper); }
 
-.route-transition { position: fixed; z-index: 500; inset: 0; display: grid; place-items: center; overflow: hidden; color: var(--paper); }
+.route-transition { position: fixed; z-index: 500; inset: 0; display: grid; place-items: center; overflow: hidden; color: var(--paper); touch-action: none; overscroll-behavior: contain; }
 .route-transition-panel { position: absolute; top: 0; bottom: 0; width: 50.1%; background: var(--ink); will-change: transform; }
 .route-transition-panel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(145deg, transparent 28%, rgba(142,53,31,.12), transparent 72%); }
 .route-transition-panel-left { left: 0; border-right: 1px solid rgba(228,139,107,.4); }
@@ -293,6 +293,8 @@ h2 em { color: inherit; font-weight: 400; }
 .company-card-visual-placeholder { display: grid; place-items: center; background: radial-gradient(circle at 78% 72%, rgba(142,53,31,.36), transparent 30%), linear-gradient(145deg, #ded8cd, #c8c0b3); }
 .company-card-visual-placeholder span { color: rgba(17,17,15,.2); font-family: Georgia, "Times New Roman", serif; font-size: clamp(4.8rem, 8vw, 8rem); letter-spacing: -.09em; line-height: 1; text-transform: uppercase; }
 .company-card > a:hover .company-card-visual-placeholder span, .company-card > a:focus-visible .company-card-visual-placeholder span { color: rgba(244,241,233,.18); }
+.company-card-image-fallback { position: absolute; inset: 0; display: grid; place-items: center; background: radial-gradient(circle at 78% 72%, rgba(142,53,31,.36), transparent 30%), linear-gradient(145deg, #ded8cd, #c8c0b3); color: rgba(17,17,15,.2); font-family: Georgia, "Times New Roman", serif; font-size: clamp(4.8rem, 8vw, 8rem); letter-spacing: -.09em; line-height: 1; text-transform: uppercase; }
+.company-card > a:hover .company-card-image-fallback, .company-card > a:focus-visible .company-card-image-fallback { color: rgba(244,241,233,.18); }
 .company-card h2 { margin: 30px 0 20px; overflow-wrap: anywhere; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.6rem, 4vw, 5.3rem); font-weight: 400; letter-spacing: -.065em; line-height: .82; }
 .company-card p { min-height: 4.2em; margin: 0; color: var(--muted); font-family: Georgia, "Times New Roman", serif; font-size: .98rem; line-height: 1.4; }
 .company-card > a:hover p, .company-card > a:focus-visible p { color: #cbc7be; }
@@ -323,6 +325,7 @@ h2 em { color: inherit; font-weight: 400; }
 .company-profile-image img { object-fit: cover; filter: saturate(.78) contrast(1.04); }
 .company-profile-image-placeholder { display: grid; place-items: center; background: radial-gradient(circle at 78% 72%, rgba(142,53,31,.5), transparent 30%), linear-gradient(145deg, #302d28, #171715); }
 .company-profile-image-placeholder span { color: rgba(244,241,233,.15); font-family: Georgia, "Times New Roman", serif; font-size: clamp(5rem, 9vw, 9rem); letter-spacing: -.09em; line-height: 1; text-transform: uppercase; }
+.company-profile-image-fallback { position: absolute; inset: 0; display: grid; place-items: center; background: radial-gradient(circle at 78% 72%, rgba(142,53,31,.5), transparent 30%), linear-gradient(145deg, #302d28, #171715); color: rgba(244,241,233,.15); font-family: Georgia, "Times New Roman", serif; font-size: clamp(5rem, 9vw, 9rem); letter-spacing: -.09em; line-height: 1; text-transform: uppercase; }
 .company-profile-number { position: absolute; right: 4vw; bottom: -5vw; color: rgba(244,241,233,.055); font-family: Georgia, "Times New Roman", serif; font-size: 27vw; line-height: 1; letter-spacing: -.1em; }
 .company-profile-body { padding: 130px 5vw 150px; background: #e9e4d9; }
 .company-profile-intro { display: grid; grid-template-columns: 1fr 2fr; align-items: start; gap: 7vw; padding-bottom: 100px; border-bottom: 1px solid var(--line-light); }
@@ -509,7 +512,7 @@ h2 em { color: inherit; font-weight: 400; }
 
 @media (max-width: 680px) {
   .hero { height: max(100svh, 860px); min-height: 860px; }
-  .hero-current { inset: auto 0 0; width: 100%; height: 380px; overflow: hidden; border-radius: 58% 0 0 0 / 15% 0 0 0; background: linear-gradient(180deg, rgba(17,17,15,.12), rgba(17,17,15,.52)), url('https://media.proximamumbai.com/logos/02-marine-drive.webp') 58% center / cover no-repeat; }
+  .hero-current { inset: auto 0 0; width: 100%; height: 380px; overflow: hidden; border-radius: 58% 0 0 0 / 15% 0 0 0; background: linear-gradient(180deg, rgba(17,17,15,.12), rgba(17,17,15,.52)), url('https://media.proximamumbai.com/logos/02-marine-drive.webp') 58% center / cover no-repeat, url('/images/monsoon-wave-v2.png') 58% center / cover no-repeat; }
   .hero-current::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(17,17,15,.34)); }
   .current-image { display: none; }
   .word-where { top: 92px; left: 4vw; font-size: clamp(3.5rem, 14vw, 5.2rem); }
@@ -527,6 +530,8 @@ h2 em { color: inherit; font-weight: 400; }
 }
 
 @media (max-width: 520px) {
+  .route-transition-copy { width: 100%; padding: 0 8vw; }
+  .route-transition-copy strong { max-width: 84vw; font-size: clamp(2.25rem, 12vw, 3.8rem); line-height: .92; }
   .site-nav { padding: 12vh 6vw 8vh; }.site-nav::before { top: 72px; left: 6vw; }.site-nav a { width: 88vw; padding: 13px 0 12px 34px; font-size: 13vw; }.site-nav a::before { bottom: 15px; }
   .word-where { font-size: clamp(3.25rem, 16vw, 4.6rem); }.word-founders { font-size: clamp(3rem, 14.5vw, 4.2rem); }
   .hero-tagline { width: 82vw; font-size: .95rem; line-height: 1.35; }

@@ -1,10 +1,10 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import CompanyNavigation from "./CompanyNavigation";
 import SiteFooter from "../components/SiteFooter";
+import ResilientImage from "../components/ResilientImage";
 import { companies } from "../data/companies";
 
 export default function CompaniesPage() {
@@ -64,7 +64,13 @@ export default function CompaniesPage() {
                 <div className="company-card-meta"><span>{String(index + 1).padStart(2, "0")}</span><span>{company.sector}</span></div>
                 <div className={`company-card-visual${company.image ? "" : " company-card-visual-placeholder"}`}>
                   {company.image
-                    ? <Image src={company.image} alt={`${company.name} company thumbnail`} fill sizes="(max-width: 680px) 90vw, (max-width: 900px) 44vw, 29vw" />
+                    ? <ResilientImage
+                        src={company.image}
+                        alt={`${company.name} company thumbnail`}
+                        fill
+                        sizes="(max-width: 680px) 90vw, (max-width: 900px) 44vw, 29vw"
+                        fallback={<span className="company-card-image-fallback" aria-hidden="true">{company.name.slice(0, 2)}</span>}
+                      />
                     : <span aria-hidden="true">{company.name.slice(0, 2)}</span>}
                 </div>
                 <h2>{company.name}</h2>
