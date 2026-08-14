@@ -29,7 +29,7 @@
       ]
     },
     {
-      "source": "/(favicon.ico|icon.png|apple-touch-icon.png|og-whatsapp.jpg)",
+      "source": "/(favicon.ico|favicon-v2.png|icon.png|apple-touch-icon.png|og-whatsapp.jpg)",
       "headers": [
         {
           "key": "Cache-Control",

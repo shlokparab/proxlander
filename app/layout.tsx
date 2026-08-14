@@ -15,11 +15,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: "Proxima Mumbai",
   icons: {
-    icon: [
-      { url: "/favicon.ico?v=2", sizes: "any" },
-      { url: "/icon.png", type: "image/png", sizes: "32x32" },
-    ],
-    shortcut: "/favicon.ico?v=2",
+    icon: [{ url: "/favicon-v2.png", type: "image/png", sizes: "256x256" }],
+    shortcut: "/favicon-v2.png",
     apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
   },
   alternates: { canonical: "/" },
